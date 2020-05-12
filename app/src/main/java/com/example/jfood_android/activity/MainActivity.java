@@ -1,21 +1,27 @@
-package com.example.jfood_android;
+package com.example.jfood_android.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ExpandableListView.OnChildClickListener;
-import android.widget.ExpandableListView.OnGroupClickListener;
-import android.widget.ExpandableListView.OnGroupCollapseListener;
-import android.widget.ExpandableListView.OnGroupExpandListener;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.jfood_android.Food;
+import com.example.jfood_android.Location;
+import com.example.jfood_android.MainListAdapter;
+import com.example.jfood_android.request.MenuRequest;
+import com.example.jfood_android.R;
+import com.example.jfood_android.Seller;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,16 +38,54 @@ public class MainActivity extends Activity {
     private ArrayList<Food> foodIdList = new ArrayList<>();
     private HashMap<Seller, ArrayList<Food>> childMapping = new HashMap<>();
 
+    private int currentUserId;
+    SharedPreferences pref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // get the listview
         expListView = findViewById(R.id.lvExp);
+        final Button pesanButton = findViewById(R.id.pesan);
+        final FloatingActionButton fabSelesai = findViewById(R.id.fabSelesai);
+
+        // pass currentUserId dari LoginActivity
+        if(getIntent().getExtras() != null){
+            Intent intent = getIntent();
+            currentUserId = intent.getIntExtra("currentUserId", 0);
+        }
 
         // preparing list data
         refreshList();
+
+        Toast.makeText(MainActivity.this, ("Current Id = " + currentUserId), Toast.LENGTH_SHORT).show();
+
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                Food selected = childMapping.get(listSeller.get(groupPosition)).get(childPosition);
+
+                Intent buatPesananIntent = new Intent(MainActivity.this, BuatPesananActivity.class);
+                buatPesananIntent.putExtra("currentUserId", currentUserId);
+                buatPesananIntent.putExtra("foodId", selected.getId());
+                buatPesananIntent.putExtra("foodName", selected.getName());
+                buatPesananIntent.putExtra("foodCategory", selected.getCategory());
+                buatPesananIntent.putExtra("foodPrice", selected.getPrice());
+
+                startActivity(buatPesananIntent);
+                return false;
+            }
+        });
+
+        fabSelesai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent selesaiPesananIntent = new Intent(MainActivity.this, SelesaiPesananActivity.class);
+                selesaiPesananIntent.putExtra("currentUserId", currentUserId);
+                startActivity(selesaiPesananIntent);
+            }
+        });
     }
 
 
@@ -105,7 +149,7 @@ public class MainActivity extends Activity {
                         }
                     }
                 } catch (JSONException e){
-                    Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Failed to Get the Food", Toast.LENGTH_SHORT).show();
                 }
                 listAdapter = new MainListAdapter(MainActivity.this, listSeller, childMapping);
 

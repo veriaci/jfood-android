@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">jfood-android</string>
+    <string name="selesai_pesanan">selesai</string>
+    <string name="selesai_pesanan_desc">Menyelesaikan Pesanan</string>
 </resources>

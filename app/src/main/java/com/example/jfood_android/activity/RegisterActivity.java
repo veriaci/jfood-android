@@ -1,4 +1,4 @@
-package com.example.jfood_android;
+package com.example.jfood_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.example.jfood_android.R;
+import com.example.jfood_android.request.RegisterRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,10 +45,10 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null){
-                                Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e){
-                            Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterActivity.this, "Register Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
