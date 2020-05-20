@@ -1,11 +1,76 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/basilBackground</item>
+        <item name="colorPrimaryDark">@color/basilBackgroundDark</item>
+        <item name="colorAccent">@color/basilSecondary800</item>
+        <item name="android:textColor">@color/basilPrimary500</item>
+        <item name="android:actionMenuTextColor">@color/basilPrimary800</item>
+        <item name="android:textColorPrimary">@color/basilPrimary800</item>
+        <item name="android:titleTextAppearance">@style/ActionBar</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <style name="Basil" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/basilPrimary500</item>
+        <item name="colorPrimaryDark">@color/basilPrimary800</item>
+        <item name="colorSecondary">@color/basilSecondary800</item>
+        <item name="android:textColor">@color/basilPrimary800</item>
+        <item name="android:textColorHint">@color/basilPrimary500</item>
+        <item name="android:actionMenuTextColor">@color/basilPrimary800</item>
+        <item name="colorControlHighlight">@color/basilBackgroundDarker</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <style name="Button" parent="TextAppearance.AppCompat.Button">
+        <item name="fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="Menu" parent="TextAppearance.AppCompat.Menu">
+        <item name="fontFamily">@font/lekton_bold</item>
+    </style>
+
+    <style name="ActionBar" parent="android:TextAppearance">
+        <item name="fontFamily">@font/lekton_bold</item>
+    </style>
+
+    <style name="FAB" parent="Theme.AppCompat">
+        <item name="fontFamily">@font/lekton_bold</item>
+        <item name="colorAccent">@color/basilPrimary100</item>
+    </style>
+
+    <style name="Theme.MaterialButton" parent="AppTheme">
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
+    <!--
+    <style name="Pastel" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/pastelPrimary</item>
+        <item name="colorPrimaryDark">@color/pastelPrimaryDark</item>
+        <item name="colorSecondary">@color/pastelAccent</item>
+        <item name="colorSecondaryVariant">@color/pastelAccentDark</item>
+        <item name="android:text">@color/pastelPrimary</item>
+        <item name="android:textColor">@color/pastelPrimary</item>
+        <item name="android:textColorHint">@color/pastelPrimary</item>
+        <item name="android:textColorPrimary">@color/basilPrimary800</item>
+        <item name="android:textColorSecondary">@color/basilPrimary500</item>
+        <item name="android:textColorHighlight">@color/basilSecondary800</item>
+        <item name="android:background">@color/pastelBackground</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    -->
 
 </resources>

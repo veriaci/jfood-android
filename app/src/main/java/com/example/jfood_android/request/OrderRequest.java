@@ -9,12 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class BuatPesananRequest extends StringRequest {
+public class OrderRequest extends StringRequest {
     private static final String URL_CASH = "http://192.168.1.3:8080/invoice/createCashInvoice";
     private static final String URL_CASHLESS = "http://192.168.1.3:8080/invoice/createCashlessInvoice";
     private Map<String, String> params;
 
-    public BuatPesananRequest(ArrayList<Integer> foodIdList, int customerId, int deliveryFee, Response.Listener<String> listener){
+    public OrderRequest(ArrayList<Integer> foodIdList, int customerId, int deliveryFee, Response.Listener<String> listener){
         super(Method.POST, URL_CASH, listener, null);
 
         /*
@@ -24,7 +24,19 @@ public class BuatPesananRequest extends StringRequest {
             sb.append(num);
         }
         String result = sb.toString();
-         */
+
+        StringBuffer stringBuffer = new StringBuffer();
+        int i = 0;
+        for ( i = 0; i < foodIdList.size(); i++){
+            int foodId = foodIdList.get(i);
+            stringBuffer.append(foodId);
+            if (i+1 != foodIdList.size()){
+                stringBuffer.append(",");
+            }
+        }
+        String foodIdString = stringBuffer.toString();
+
+*/
         String[] str= new String[foodIdList.size()];
         Object[] objArr = foodIdList.toArray();
         int i = 0;
@@ -41,7 +53,7 @@ public class BuatPesananRequest extends StringRequest {
         params.put("deliveryFee", Integer.toString(deliveryFee));
     }
 
-    public BuatPesananRequest(ArrayList<Integer> foodIdList, int customerId, String promoCode, Response.Listener<String> listener){
+    public OrderRequest(ArrayList<Integer> foodIdList, int customerId, String promoCode, Response.Listener<String> listener){
         super(Method.POST, URL_CASHLESS, listener, null);
 
         String[] str= new String[foodIdList.size()];

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.OrderActivity"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:theme="@style/Basil"
+    android:transitionName="@string/transition_string"
+    android:background="@color/basilBackground">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:paddingHorizontal="15dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textbox"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvMakanName"
+            android:text="Food JFood"
+            android:transitionName="example_transition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textAllCaps="false"
+            android:textSize="36sp"
+            android:fontFamily="@font/montserrat_semi_bold"
+            android:textStyle="bold"
+            android:textColor="@color/basilSecondary800"
+            android:textAlignment="center"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:paddingHorizontal="15dp"
+            android:background="@color/basilPrimary500"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="10dp"/>
+
+        <ImageView
+            android:id="@+id/imgMakan"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/pizza"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/staticMakanLocation"
+                android:gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_regular"
+                android:text="City"/>
+            <TextView
+                android:id="@+id/tvMakanLocation"
+                android:gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_bold"
+                android:textSize="16sp"
+                android:autoSizeTextType="uniform"
+                android:text="TextView"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/basilPrimary800"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/staticMakanPrice"
+                android:gravity="center"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_regular"
+                android:text="Food Price" />
+            <TextView
+                android:id="@+id/tvMakanPrice"
+                android:gravity="center"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_bold"
+                android:textSize="20sp"
+                android:autoSizeTextType="uniform"
+                android:text="TextView" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/basilPrimary800"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:id="@+id/staticMakanCategory"
+                android:gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_regular"
+                android:text="Category"/>
+
+            <TextView
+                android:id="@+id/tvMakanCategory"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_bold"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:autoSizeTextType="uniform"
+                android:text="TextView"/>
+        </LinearLayout>
+     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/basilPrimary500"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/btnBuyNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/button_accept"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=" B U Y   N O W "/>
+
+
+        <Button
+            android:id="@+id/btnAddToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/button_accept"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=" A D D "/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_scene"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context=".activity.MainActivity"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#232931">
+    android:theme="@style/Basil"
+    android:background="@color/basilBackground">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -16,17 +18,20 @@
         <ExpandableListView
             android:id="@+id/lvExp"
             android:layout_height="match_parent"
-            android:layout_width="match_parent">
+            android:layout_width="match_parent"
+            android:theme="@style/FAB">
         </ExpandableListView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSelesai"
+        android:transitionName="fabTransition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:contentDescription="@string/selesai_pesanan"
-        android:src="@drawable/ic_done_black_24dp"
+        android:src="@drawable/ic_done_basil_24dp"
+            android:theme="@style/FAB"
         android:clickable="true"
         app:elevation="4dp"/>
 

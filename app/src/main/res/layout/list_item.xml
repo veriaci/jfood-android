@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="55dip"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#232931">
+    android:background="@color/basilBackground">
 
-    <TextView
-        android:id="@+id/lblListItem"
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="17dip"
-        android:textColor="#eeeeee"
-        android:paddingTop="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/lblListItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nama Makanan bee jkwqlek wene lwnelkr nwelknr"
+            android:textSize="24dp"
+            android:transitionName="example_transition"
+            android:textColor="@color/basilPrimary800"
+            android:fontFamily="@font/lekton_regular"
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="65dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+
+
+        <ImageButton
+            android:id="@+id/btn_add_to_cart"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_add_shopping_cart_basil_24dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/lbListPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rp. 39999"
+        android:textSize="12dp"
+        android:textColor="@color/basilPrimary800"
+        android:fontFamily="@font/lekton_regular"
+        android:foreground="?selectableItemBackgroundBorderless"
         android:paddingBottom="5dp"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/basilPrimary100"/>
 
 </LinearLayout>

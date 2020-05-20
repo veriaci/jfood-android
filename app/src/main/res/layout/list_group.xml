@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#232931">
+    android:theme="@style/Basil"
+    android:background="@color/basilBackgroundDark">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="8dp"
-        android:background="#393e46">
+        android:background="@color/basilBackgroundDark">
 
         <TextView
             android:id="@+id/lblListHeader"
@@ -17,6 +18,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
             android:textSize="17dp"
-            android:textColor="#4ecca3" />
+            android:textColor="@color/basilPrimary500"
+            android:fontFamily="@font/lekton_bold"
+            android:foreground="?selectableItemBackgroundBorderless"/>
     </LinearLayout>
 </LinearLayout>

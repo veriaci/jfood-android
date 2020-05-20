@@ -1,6 +1,7 @@
 package com.example.jfood_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +13,19 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.jfood_android.request.PesananFetchRequest;
-import com.example.jfood_android.request.PesananStatusRequest;
+import com.example.jfood_android.request.InvoiceFetchRequest;
+import com.example.jfood_android.request.InvoiceStatusRequest;
 import com.example.jfood_android.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SelesaiPesananActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
+public class InvoiceActivity extends AppCompatActivity {
 
     private int currentUserId = 0;
     private int currentInvoiceId = 0;
@@ -51,7 +56,7 @@ public class SelesaiPesananActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selesai_pesanan);
+        setContentView(R.layout.activity_invoice);
 
         // Find View
         staticInvoiceId = findViewById(R.id.staticInvoiceId);
@@ -113,26 +118,26 @@ public class SelesaiPesananActivity extends AppCompatActivity {
         btnInvoiceBatal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(SelesaiPesananActivity.this, ("Test Batal"), Toast.LENGTH_LONG).show();
+                //Toast.makeText(InvoiceActivity.this, ("Test Batal"), Toast.LENGTH_LONG).show();
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try{
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null){
-                                Toast.makeText(SelesaiPesananActivity.this, ("Pembatalan Invoice: " + currentInvoiceId + " Sukses"), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SelesaiPesananActivity.this, MainActivity.class);
+                                Toast.makeText(InvoiceActivity.this, ("Pembatalan Invoice: " + currentInvoiceId + " Sukses"), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(InvoiceActivity.this, MainActivity.class);
                                 intent.putExtra("currentUserId", currentUserId);
                                 startActivity(intent);
                             }
                         } catch (JSONException e){
-                            Toast.makeText(SelesaiPesananActivity.this, ("Pembatalan Invoice: " + currentInvoiceId + " GAGAL"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InvoiceActivity.this, ("Pembatalan Invoice: " + currentInvoiceId + " GAGAL"), Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
 
-                PesananStatusRequest pesananStatusRequest = new PesananStatusRequest(currentInvoiceId, "Canceled", responseListener);
-                RequestQueue queue = Volley.newRequestQueue(SelesaiPesananActivity.this);
+                InvoiceStatusRequest pesananStatusRequest = new InvoiceStatusRequest(currentInvoiceId, "Canceled", responseListener);
+                RequestQueue queue = Volley.newRequestQueue(InvoiceActivity.this);
                 queue.add(pesananStatusRequest);
             }
         });
@@ -146,19 +151,19 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                         try{
                             JSONObject jsonObject = new JSONObject(response);
                             if (jsonObject != null){
-                                Toast.makeText(SelesaiPesananActivity.this, (" Pemesanan: " + currentInvoiceId + " Sukses"), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(SelesaiPesananActivity.this, MainActivity.class);
+                                Toast.makeText(InvoiceActivity.this, (" Pemesanan: " + currentInvoiceId + " Sukses"), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(InvoiceActivity.this, MainActivity.class);
                                 intent.putExtra("currentUserId", currentUserId);
-                                startActivity(intent);
+                                startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(InvoiceActivity.this).toBundle());
                             }
                         } catch (JSONException e){
-                            Toast.makeText(SelesaiPesananActivity.this, (" Pemesanan: " + currentInvoiceId + " GAGAL"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(InvoiceActivity.this, (" Pemesanan: " + currentInvoiceId + " GAGAL"), Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
 
-                PesananStatusRequest pesananStatusRequest = new PesananStatusRequest(currentInvoiceId, "Finished", responseListener);
-                RequestQueue queue = Volley.newRequestQueue(SelesaiPesananActivity.this);
+                InvoiceStatusRequest pesananStatusRequest = new InvoiceStatusRequest(currentInvoiceId, "Finished", responseListener);
+                RequestQueue queue = Volley.newRequestQueue(InvoiceActivity.this);
                 queue.add(pesananStatusRequest);
             }
         });
@@ -172,7 +177,13 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                     JSONArray jsonArray = new JSONArray(response);
                     if(jsonArray != null){
                         // Get Invoice
-                        Toast.makeText(SelesaiPesananActivity.this, ("Test length: " + jsonArray.length()), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(InvoiceActivity.this, ("Test length: " + jsonArray.length()), Toast.LENGTH_SHORT).show();
+                        if (jsonArray.length() == 0){
+                            tvKosong.setVisibility(View.VISIBLE);
+                            tvJudul.setVisibility(View.GONE);
+                            btnInvoiceBatal.setVisibility(View.GONE);
+                            btnInvoiceSelesai.setVisibility(View.GONE);
+                        }
                         //for (int i = jsonArray.length()-1; i < jsonArray.length(); i++){
                             JSONObject invoice = jsonArray.getJSONObject(jsonArray.length()-1);
                             if(invoice.getString("invoiceStatus").equals("Ongoing")) {
@@ -200,26 +211,38 @@ public class SelesaiPesananActivity extends AppCompatActivity {
 
                                 int invoiceId = invoice.getInt("id");
                                 //String foods = invoice.getString("foods");
-                                String date = invoice.getString("date");
                                 String invoiceStatus = invoice.getString("invoiceStatus");
                                 String paymentType = invoice.getString("paymentType");
                                 int totalPrice = invoice.getInt("totalPrice");
-
                                 JSONObject customer = invoice.getJSONObject("customer");
                                 String customerName = customer.getString("name");
-
                                 //foods = foods.substring(1, foods.length()-1);
                                 JSONArray foods = invoice.getJSONArray("foods");
+
+                                StringBuffer stringBuffer = new StringBuffer();
                                 String foodName = "";
-                                for (int j = foods.length() - 1; j < foods.length(); j++) {
+                                for (int j = 0; j < foods.length(); j++) {
                                     JSONObject food = foods.getJSONObject(j);
-                                    foodName = food.getString("name");
+                                    stringBuffer.append(food.getString("name"));
+                                    if (j+1 != foods.length()){
+                                        stringBuffer.append(", ");
+                                    }
+                                }
+                                foodName = stringBuffer.toString();
+
+                                SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+                                formatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
+                                //String date = invoice.getString("date");
+                                try {
+                                    Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(invoice.getString("date"));
+                                    tvInvoiceDate.setText(formatter.format(date));
+                                } catch (Exception e){
+                                    Toast.makeText(InvoiceActivity.this, ("Date Parsing Error"), Toast.LENGTH_SHORT).show();
                                 }
 
                                 tvInvoiceId.setText(Integer.toString(invoiceId));
                                 tvInvoiceCustomer.setText(customerName);
                                 tvInvoiceFood.setText(foodName);
-                                tvInvoiceDate.setText(date);
                                 tvInvoiceType.setText(paymentType);
                                 tvInvoiceStatus.setText(invoiceStatus);
                                 tvInvoiceTotalPrice.setText(Integer.toString(totalPrice));
@@ -227,7 +250,7 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                                 if (currentInvoiceId == 0) {
                                     currentInvoiceId = invoiceId;
                                 }
-                                Toast.makeText(SelesaiPesananActivity.this, ("Invoice: " + currentInvoiceId), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(InvoiceActivity.this, ("Invoice: " + currentInvoiceId), Toast.LENGTH_SHORT).show();
                             } else {
                                 tvKosong.setVisibility(View.VISIBLE);
                                 tvJudul.setVisibility(View.GONE);
@@ -236,20 +259,20 @@ public class SelesaiPesananActivity extends AppCompatActivity {
                             }
                         //}
                     } else {
-                        Toast.makeText(SelesaiPesananActivity.this, "Fetch JSON empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(InvoiceActivity.this, "Fetch JSON empty", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e){
-                    Toast.makeText(SelesaiPesananActivity.this, "Failed to Get the Invoice", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InvoiceActivity.this, "Failed to Get the Invoice", Toast.LENGTH_SHORT).show();
 
-                    Intent fetchIntent = new Intent(SelesaiPesananActivity.this, MainActivity.class);
-                    fetchIntent.putExtra("currentUserId", currentUserId);
-                    startActivity(fetchIntent);
+                    Intent intent = new Intent(InvoiceActivity.this, MainActivity.class);
+                    intent.putExtra("currentUserId", currentUserId);
+                    startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(InvoiceActivity.this).toBundle());
                 }
             }
         };
-        PesananFetchRequest pesananFetchRequest = new PesananFetchRequest(currentUserId, responseListener);
-        RequestQueue queue = Volley.newRequestQueue(SelesaiPesananActivity.this);
+        InvoiceFetchRequest pesananFetchRequest = new InvoiceFetchRequest(currentUserId, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(InvoiceActivity.this);
         queue.add(pesananFetchRequest);
     }
 }

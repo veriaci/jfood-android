@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activity.InvoiceActivity"
+    android:transitionName="fabTransition"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:theme="@style/Basil"
+    android:background="@color/basilBackground">
+
+    <TextView
+        android:id="@+id/judul"
+        android:text="Finish Order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textAllCaps="false"
+        android:textSize="46sp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="@color/basilSecondary800"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/kosong"
+        android:text="Tidak ada Pesanan Ongoing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:textAllCaps="false"
+        android:textSize="46sp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textColor="@color/basilSecondary800"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/basilPrimary500"
+        android:layout_marginHorizontal="30dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/textbox"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staticInvoiceId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ID Invoice:"
+                android:fontFamily="@font/lekton_regular"
+                android:ems="10"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvInvoiceId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:fontFamily="@font/lekton_bold"
+                android:textAlignment="viewEnd"
+                android:ems="10"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staticInvoiceCustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Customer:"
+                android:fontFamily="@font/lekton_regular"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvInvoiceCustomer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:fontFamily="@font/lekton_bold"
+                android:textAlignment="viewEnd"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staticInvoiceFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Makanan:"
+                android:fontFamily="@font/lekton_regular"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvInvoiceFood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:fontFamily="@font/lekton_bold"
+                android:textAlignment="viewEnd"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staticInvoiceDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal Invoice:"
+                android:fontFamily="@font/lekton_regular"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvInvoiceDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:fontFamily="@font/lekton_bold"
+                android:textAlignment="viewEnd"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staticInvoiceType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tipe Invoice:"
+                android:fontFamily="@font/lekton_regular"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvInvoiceType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:fontFamily="@font/lekton_bold"
+                android:textAlignment="viewEnd"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staticInvoiceStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status Invoice:"
+                android:fontFamily="@font/lekton_regular"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/tvInvoiceStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:fontFamily="@font/lekton_bold"
+                android:textAlignment="viewEnd"
+                android:ems="10"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/staticInvoiceTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total Biaya:"
+                android:fontFamily="@font/lekton_regular"
+                android:ems="10"
+                android:layout_marginTop="5dp"/>
+            <TextView
+                android:id="@+id/tvInvoiceTotalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:fontFamily="@font/lekton_bold"
+                android:textAlignment="viewEnd"
+                android:ems="10"
+                android:layout_marginTop="5dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/basilPrimary500"
+        android:layout_marginHorizontal="30dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/invoiceBatal"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="10sp"
+            android:clickable="true"
+            app:elevation="4dp"
+            android:textColor="@color/basilSecondary800"
+            android:background="@drawable/button_cancel"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=" B a t a l " />
+
+        <Button
+            android:id="@+id/invoiceSelesai"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="30sp"
+            android:layout_marginTop="20sp"
+            android:layout_marginBottom="10sp"
+            android:clickable="true"
+            app:elevation="4dp"
+            android:background="@drawable/button_accept"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=" S e l e s a i " />
+    </LinearLayout>
+</LinearLayout>

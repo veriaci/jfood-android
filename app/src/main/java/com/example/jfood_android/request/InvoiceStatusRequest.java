@@ -7,11 +7,11 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PesananStatusRequest extends StringRequest {
+public class InvoiceStatusRequest extends StringRequest {
     public static final String URL_CANCELED_INVOICE = "http://192.168.1.3:8080/invoice/invoiceStatus/";
     private Map<String, String> params;
 
-    public PesananStatusRequest(int id, String invoiceStatus, Response.Listener<String> listener) {
+    public InvoiceStatusRequest(int id, String invoiceStatus, Response.Listener<String> listener) {
         super(Method.PUT,URL_CANCELED_INVOICE + id, listener, null);
 
         params = new HashMap<>();

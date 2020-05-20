@@ -1,6 +1,7 @@
 package com.example.jfood_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -63,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
+                startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(RegisterActivity.this).toBundle());
             }
         });
 

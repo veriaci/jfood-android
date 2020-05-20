@@ -7,16 +7,36 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="JFood"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.SelesaiPesananActivity"></activity>
-        <activity android:name=".activity.BuatPesananActivity" />
-        <activity android:name=".activity.MainActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.LoginActivity">
+        <activity android:name=".activity.FoodActivity"
+            android:label="Food"
+            android:parentActivityName=".activity.MainActivity"/>
+        <activity
+            android:name=".activity.CartActivity"
+            android:label="Food Cart"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.InvoiceActivity"
+            android:label="Finish Order"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.OrderActivity"
+            android:label="JFood Order"
+            android:parentActivityName=".activity.MainActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:parentActivityName=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.RegisterActivity"
+            android:label="JFood Register"
+            android:parentActivityName=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:label="JFood Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

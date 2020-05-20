@@ -3,4 +3,27 @@
     <color name="colorPrimary">#4ecca3</color>
     <color name="colorPrimaryDark">#3a9979</color>
     <color name="colorAccent">#4ecca3</color>
+    <color name="colorBackground">#eeeeee</color>
+    <color name="colorBackgroundDark">#393e46</color>
+    <color name="colorBackgroundDarker">#232931</color>
+
+    <color name="pastelPrimary">#00a2ad</color>
+    <color name="pastelPrimaryDark">#014656</color>
+    <color name="pastelAccent">#fdd65d</color>
+    <color name="pastelAccentDark">#f6a801</color>
+    <color name="pastelBackground">#ececec</color>
+
+    <color name="formalPrimary6">#4A6572</color>
+    <color name="formalPrimary7">#344955</color>
+    <color name="formalPrimary8">#232F34</color>
+    <color name="formalSecondary5">#F9AA33</color>
+
+    <color name="basilPrimary800">#356859</color>
+    <color name="basilPrimary500">#37966F</color>
+    <color name="basilPrimary100">#B9E4C9</color>
+    <color name="basilSecondary800">#FD5523</color>
+    <color name="basilBackground">#FFFBE6</color>
+    <color name="basilBackgroundDark">#d6d0ae</color>
+    <color name="basilBackgroundDarker">#29302e</color>
+    <color name="basilBackgroundGreen">#f9ffe6</color>
 </resources>

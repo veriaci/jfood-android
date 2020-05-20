@@ -1,10 +1,14 @@
 package com.example.jfood_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,16 +34,18 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        //setSupportActionBar(myToolbar);
+
         final EditText etEmail = findViewById(R.id.etEmail);
         final EditText etPassword = findViewById(R.id.etPassword);
         final Button btnLogin = findViewById(R.id.btnLogin);
         final TextView tvRegister = findViewById(R.id.tvRegister);
 
-        //mainIntent = new Intent(LoginActivity.this, MainActivity.class);
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
-        if(pref.contains("Email") && pref.contains("Password")){
-            etEmail.setText(pref.getString("Email", ""));
-            etPassword.setText(pref.getString("Password", ""));
+        if(pref.contains("email") && pref.contains("password")){
+            etEmail.setText(pref.getString("email", ""));
+            etPassword.setText(pref.getString("password", ""));
         }
 
         btnLogin.setOnClickListener(new View.OnClickListener(){
@@ -58,11 +64,13 @@ public class LoginActivity extends AppCompatActivity {
                                     Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
                                     id = jsonObject.getInt("id");
                                     SharedPreferences.Editor editor = pref.edit();
-                                    editor.putString("Email", email);
-                                    editor.putString("Password", password);
+                                    editor.putString("email", email);
+                                    editor.putString("password", password);
+                                    editor.putInt("currentUserId", id);
                                     editor.commit();
-                                    mainIntent.putExtra("currentUserId", id);
-                                    startActivity(mainIntent);
+                                    //mainIntent.putExtra("currentUserId", id);
+
+                                    startActivity(mainIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
                                 }
                             } catch (JSONException e){
                                 Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
@@ -88,9 +96,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
-                startActivity(intent);
+                startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
             }
         });
-
     }
 }
+
+

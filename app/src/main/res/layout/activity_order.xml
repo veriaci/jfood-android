@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.OrderActivity"
+    android:transitionName="orderTransition"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:theme="@style/Basil"
+    android:background="@color/basilBackground">
+
+    <TextView
+        android:id="@+id/pesanan"
+        android:text="Order JFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textAllCaps="false"
+        android:textSize="46sp"
+        android:fontFamily="@font/montserrat_semi_bold"
+        android:textStyle="bold"
+        android:textColor="@color/basilSecondary800"
+        android:textAlignment="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/basilPrimary500"
+        android:layout_marginHorizontal="30dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvOrderList"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:scrollbars="vertical">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textbox"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/staticPayMethod"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_regular"
+                android:text="Payment Method:"/>
+        
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp">
+        
+                <RadioButton
+                    android:id="@+id/cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/basilPrimary800"
+                    android:fontFamily="@font/lekton_bold"
+                    android:text="Via CASH" />
+        
+                <RadioButton
+                    android:id="@+id/cashless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/basilPrimary800"
+                    android:fontFamily="@font/lekton_bold"
+                    android:text="Via CASHLESS" />
+            </RadioGroup>
+        </LinearLayout>
+    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/textCode"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_regular"
+                android:text="Promo Code:" />
+    
+            <EditText
+                android:id="@+id/promo_code"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="5dp"
+                android:ems="10"
+                android:hint="Promo Code"
+                android:inputType="textPersonName"
+                android:textColor="@color/basilPrimary800"
+                android:fontFamily="@font/lekton_bold"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/staticTotalPrice"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_regular"
+                android:text="Total Price"/>
+    
+            <TextView
+                android:id="@+id/total_price"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="75dp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/lekton_bold"
+                android:text="TextView"/>
+        </LinearLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/basilPrimary500"
+        android:layout_marginHorizontal="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="20dp">
+
+        <Button
+            android:id="@+id/hitung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_accept"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:fontFamily="@font/montserrat_medium"
+            android:clickable="true"
+            android:text=" C O U N T "/>
+
+        <Button
+            android:id="@+id/pesan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_accept"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:fontFamily="@font/montserrat_medium"
+            android:clickable="true"
+            android:text=" O R D E R "/>
+    </LinearLayout>
+
+</LinearLayout>

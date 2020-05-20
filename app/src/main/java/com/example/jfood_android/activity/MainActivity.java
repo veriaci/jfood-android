@@ -3,21 +3,29 @@ package com.example.jfood_android.activity;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.example.jfood_android.Food;
 import com.example.jfood_android.Location;
-import com.example.jfood_android.MainListAdapter;
+import com.example.jfood_android.adapter.MainListAdapter;
 import com.example.jfood_android.request.MenuRequest;
 import com.example.jfood_android.R;
 import com.example.jfood_android.Seller;
@@ -27,7 +35,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
     MainListAdapter listAdapter;
     ExpandableListView expListView;
@@ -51,9 +59,15 @@ public class MainActivity extends Activity {
         final FloatingActionButton fabSelesai = findViewById(R.id.fabSelesai);
 
         // pass currentUserId dari LoginActivity
+        /*
         if(getIntent().getExtras() != null){
             Intent intent = getIntent();
             currentUserId = intent.getIntExtra("currentUserId", 0);
+        }
+        */
+        pref = getSharedPreferences("user_details", MODE_PRIVATE);
+        if(pref.contains("currentUserId")){
+            currentUserId = pref.getInt("currentUserId", 0);
         }
 
         // preparing list data
@@ -61,33 +75,38 @@ public class MainActivity extends Activity {
 
         Toast.makeText(MainActivity.this, ("Current Id = " + currentUserId), Toast.LENGTH_SHORT).show();
 
+        /*
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
                 Food selected = childMapping.get(listSeller.get(groupPosition)).get(childPosition);
 
-                Intent buatPesananIntent = new Intent(MainActivity.this, BuatPesananActivity.class);
+                Intent buatPesananIntent = new Intent(MainActivity.this, OrderActivity.class);
                 buatPesananIntent.putExtra("currentUserId", currentUserId);
                 buatPesananIntent.putExtra("foodId", selected.getId());
                 buatPesananIntent.putExtra("foodName", selected.getName());
                 buatPesananIntent.putExtra("foodCategory", selected.getCategory());
                 buatPesananIntent.putExtra("foodPrice", selected.getPrice());
 
-                startActivity(buatPesananIntent);
+                Bundle options = ActivityOptionsCompat.makeClipRevealAnimation(
+                        expListView, 0, 0, expListView.getWidth(), expListView.getHeight()).toBundle();
+                startActivity(buatPesananIntent, options);
                 return false;
             }
         });
+         */
 
         fabSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent selesaiPesananIntent = new Intent(MainActivity.this, SelesaiPesananActivity.class);
+                Intent selesaiPesananIntent = new Intent(MainActivity.this, InvoiceActivity.class);
                 selesaiPesananIntent.putExtra("currentUserId", currentUserId);
-                startActivity(selesaiPesananIntent);
+                //startActivity(selesaiPesananIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this, fabSelesai, ViewCompat.getTransitionName(fabSelesai));
+                startActivity(selesaiPesananIntent, options.toBundle());
             }
         });
     }
-
 
     protected void refreshList(){
         Response.Listener<String> responseListener = new Response.Listener<String>(){
@@ -160,5 +179,48 @@ public class MainActivity extends Activity {
         MenuRequest menuRequest = new MenuRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(menuRequest);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_cart:
+                Intent intent = new Intent(MainActivity.this, CartActivity.class);
+                intent.putExtra("currentUserId", currentUserId);
+                startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }
