@@ -9,25 +9,47 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/lblListImage"
+            android:transitionName="example_transition"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/pizza"/>
+
         <TextView
             android:id="@+id/lblListItem"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="Nama Makanan bee jkwqlek wene lwnelkr nwelknr"
             android:textSize="24dp"
-            android:transitionName="example_transition"
             android:textColor="@color/basilPrimary800"
             android:fontFamily="@font/lekton_regular"
             android:background="?selectableItemBackgroundBorderless"
-            android:layout_alignParentStart="true"
+            android:layout_toRightOf="@id/lblListImage"
             android:layout_alignParentTop="true"
             android:layout_marginEnd="65dp"
-            android:paddingTop="5dp"
-            android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+            android:paddingTop="5dp" />
 
+        <TextView
+            android:id="@+id/lbListPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Rp. 39999"
+            android:textSize="12dp"
+            android:textColor="@color/basilPrimary800"
+            android:fontFamily="@font/lekton_regular"
+            android:foreground="?selectableItemBackgroundBorderless"
+            android:layout_below="@+id/lblListItem"
+            android:paddingBottom="5dp"
+            android:paddingStart="80dp" />
 
         <ImageButton
-            android:id="@+id/btn_add_to_cart"
+            android:id="@+id/lbAddToCart"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:src="@drawable/ic_add_shopping_cart_basil_24dp"
@@ -35,19 +57,8 @@
             android:layout_marginEnd="10dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"/>
-    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/lbListPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rp. 39999"
-        android:textSize="12dp"
-        android:textColor="@color/basilPrimary800"
-        android:fontFamily="@font/lekton_regular"
-        android:foreground="?selectableItemBackgroundBorderless"
-        android:paddingBottom="5dp"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" />
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"

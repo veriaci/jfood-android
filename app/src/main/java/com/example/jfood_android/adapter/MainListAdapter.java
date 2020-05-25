@@ -16,6 +16,7 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,21 +71,22 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
         final int childPrice = food.getPrice();
 
         String currentUserEmail = "";
-        int currentUserId = 0;
+        String currentUserId = "";
         pref = _context.getSharedPreferences("user_details", MODE_PRIVATE);
         if(pref.contains("email") || pref.contains("currentUserId")){
             currentUserEmail = pref.getString("email", "");
-            currentUserId = pref.getInt("currentUserId", 0);
+            currentUserId = pref.getString("currentUserId", "");
         }
         final String tempUserEmail = currentUserEmail;
-        final int tempUserId = currentUserId;
+        final String tempUserId = currentUserId;
 
         if (convertView == null) {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = infalInflater.inflate(R.layout.list_item, null);
         }
         final View finalView = convertView;
-        final ImageButton btnAddItem = finalView.findViewById(R.id.btn_add_to_cart);
+        final ImageView lbListImage = finalView.findViewById(R.id.lblListImage);
+        final ImageButton btnAddItem = finalView.findViewById(R.id.lbAddToCart);
         final TextView txtListChild = finalView.findViewById(R.id.lblListItem);
         final TextView txtListPrice = finalView.findViewById(R.id.lbListPrice);
         txtListChild.setText(childText);
@@ -103,7 +105,7 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
                 foodIntent.putExtra("foodPrice", food.getPrice());
                 foodIntent.putExtra("foodLocation", food.getSeller().getLocation().getCity());
                 //_context.startActivity(foodIntent);
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) _context, txtListChild, ViewCompat.getTransitionName(txtListChild));
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) _context, lbListImage, ViewCompat.getTransitionName(lbListImage));
                 _context.startActivity(foodIntent, options.toBundle());
                 //return false;
             }

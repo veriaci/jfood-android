@@ -17,12 +17,14 @@
             android:id="@+id/staticFoodName"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:fontFamily="@font/lekton_regular"
             android:text="Food Name:"/>
         <TextView
             android:id="@+id/tvOrderName"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:layout_marginStart="75dp"
             android:fontFamily="@font/lekton_bold"
             android:text="TextView"/>
@@ -37,7 +39,6 @@
             android:id="@+id/staticCategory"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_regular"
             android:text="Category:"/>
         <TextView
@@ -45,7 +46,6 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_bold"
             android:text="TextView" />
     </LinearLayout>
@@ -59,7 +59,6 @@
             android:id="@+id/staticPrice"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_regular"
             android:text="Single Price:" />
         <TextView
@@ -67,7 +66,6 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_bold"
             android:text="TextView" />
     </LinearLayout>
@@ -82,7 +80,6 @@
             android:id="@+id/staticQuantity"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_regular"
             android:text="Quantity:" />
         <TextView
@@ -90,7 +87,6 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_bold"
             android:text="TextView" />
     </LinearLayout>
@@ -104,16 +100,16 @@
             android:id="@+id/staticSubTotal"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_regular"
+            android:layout_marginBottom="3dp"
             android:text="SubTotal:" />
         <TextView
             android:id="@+id/tvOrderSubTotal"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="75dp"
-            android:layout_marginTop="5dp"
             android:fontFamily="@font/lekton_bold"
+            android:layout_marginBottom="3dp"
             android:text="TextView" />
     </LinearLayout>
 

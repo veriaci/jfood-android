@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -46,8 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Food> foodIdList = new ArrayList<>();
     private HashMap<Seller, ArrayList<Food>> childMapping = new HashMap<>();
 
-    private int currentUserId;
+    private String currentUserId;
     SharedPreferences pref;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
         final Button pesanButton = findViewById(R.id.pesan);
         final FloatingActionButton fabSelesai = findViewById(R.id.fabSelesai);
 
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Fetching foods...");
+
         // pass currentUserId dari LoginActivity
         /*
         if(getIntent().getExtras() != null){
@@ -67,11 +72,8 @@ public class MainActivity extends AppCompatActivity {
         */
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         if(pref.contains("currentUserId")){
-            currentUserId = pref.getInt("currentUserId", 0);
+            currentUserId = pref.getString("currentUserId", "");
         }
-
-        // preparing list data
-        refreshList();
 
         Toast.makeText(MainActivity.this, ("Current Id = " + currentUserId), Toast.LENGTH_SHORT).show();
 
@@ -108,72 +110,88 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        foodIdList.clear();
+        listSeller.clear();
+        progressDialog.show();
+        // preparing list data
+        refreshList();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
     protected void refreshList(){
         Response.Listener<String> responseListener = new Response.Listener<String>(){
             @Override
             public void onResponse(String response){
-                try{
-                    JSONArray jsonResponse = new JSONArray(response);
-                    if (jsonResponse != null){
-                        for (int i = 0; i < jsonResponse.length(); i++){
-                            JSONObject food = jsonResponse.getJSONObject(i);
-                            JSONObject seller = food.getJSONObject("seller");
-                            JSONObject location = seller.getJSONObject("location");
+            try{
+                JSONArray jsonResponse = new JSONArray(response);
+                if (jsonResponse != null){
+                    for (int i = 0; i < jsonResponse.length(); i++){
+                        JSONObject food = jsonResponse.getJSONObject(i);
+                        JSONObject seller = food.getJSONObject("seller");
+                        JSONObject location = seller.getJSONObject("location");
 
-                            // location
-                            String province = location.getString("province");
-                            String description = location.getString("description");
-                            String city = location.getString("city");
+                        // location
+                        String province = location.getString("province");
+                        String description = location.getString("description");
+                        String city = location.getString("city");
 
-                            // Seller
-                            int idSeller = seller.getInt("id");
-                            String nameSeller = seller.getString("name");
-                            String email = seller.getString("email");
-                            String phoneNumber = seller.getString("phoneNumber");
+                        // Seller
+                        int idSeller = seller.getInt("id");
+                        String nameSeller = seller.getString("name");
+                        String email = seller.getString("email");
+                        String phoneNumber = seller.getString("phoneNumber");
 
-                            // Food
-                            int idFood = food.getInt("id");
-                            String nameFood = food.getString("name");
-                            int price = food.getInt("price");
-                            String category = food.getString("category");
+                        // Food
+                        int idFood = food.getInt("id");
+                        String nameFood = food.getString("name");
+                        int price = food.getInt("price");
+                        String category = food.getString("category");
 
-                            // Create Object
-                            Location location1 = new Location(province, description, city);
-                            Seller seller1 = new Seller(idSeller, nameSeller, email, phoneNumber, location1);
-                            Food food1 = new Food(idFood, nameFood, seller1, price, category);
+                        // Create Object
+                        Location location1 = new Location(province, description, city);
+                        Seller seller1 = new Seller(idSeller, nameSeller, email, phoneNumber, location1);
+                        Food food1 = new Food(idFood, nameFood, seller1, price, category);
 
-                            // Add to List
-                            if(listSeller.isEmpty()){
-                                listSeller.add(seller1);
-                            } else {
-                                for (Seller temp : listSeller){
-                                    if (temp.getName().equals(seller1.getName())){
-                                        break;
-                                    } else {
-                                        listSeller.add(seller1);
-                                    }
+                        // Add to List
+                        if(listSeller.isEmpty()){
+                            listSeller.add(seller1);
+                        } else {
+                            for (Seller temp : listSeller){
+                                if (temp.getName().equals(seller1.getName())){
+                                    break;
+                                } else {
+                                    listSeller.add(seller1);
                                 }
-                            }
-                            foodIdList.add(food1);
-
-                            for (Seller sel : listSeller){
-                                ArrayList<Food> temp = new ArrayList<>();
-                                for (Food foo : foodIdList){
-                                    if(foo.getSeller().getName().equals(sel.getName()) || foo.getSeller().getEmail().equals(sel.getEmail()) || foo.getSeller().getPhoneNumber().equals(sel.getPhoneNumber())){
-                                        temp.add(foo);
-                                    }
-                                }
-                                childMapping.put(sel,temp);
                             }
                         }
-                    }
-                } catch (JSONException e){
-                    Toast.makeText(MainActivity.this, "Failed to Get the Food", Toast.LENGTH_SHORT).show();
-                }
-                listAdapter = new MainListAdapter(MainActivity.this, listSeller, childMapping);
+                        foodIdList.add(food1);
 
-                // setting list adapter
-                expListView.setAdapter(listAdapter);
+                        for (Seller sel : listSeller){
+                            ArrayList<Food> temp = new ArrayList<>();
+                            for (Food foo : foodIdList){
+                                if(foo.getSeller().getName().equals(sel.getName()) || foo.getSeller().getEmail().equals(sel.getEmail()) || foo.getSeller().getPhoneNumber().equals(sel.getPhoneNumber())){
+                                    temp.add(foo);
+                                }
+                            }
+                            childMapping.put(sel,temp);
+                        }
+                    }
+                }
+            } catch (JSONException e){
+                Toast.makeText(MainActivity.this, "Failed to Get the Food", Toast.LENGTH_SHORT).show();
+            }
+            listAdapter = new MainListAdapter(MainActivity.this, listSeller, childMapping);
+
+            progressDialog.dismiss();
+            // setting list adapter
+            expListView.setAdapter(listAdapter);
             }
         };
         MenuRequest menuRequest = new MenuRequest(responseListener);

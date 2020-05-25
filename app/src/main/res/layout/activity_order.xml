@@ -33,7 +33,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvOrderList"
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:scrollbars="vertical">
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -92,18 +92,23 @@
                 android:fontFamily="@font/lekton_regular"
                 android:text="Promo Code:" />
     
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/promo_code"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="75dp"
                 android:layout_marginTop="5dp"
-                android:ems="10"
-                android:hint="Promo Code"
-                android:inputType="textPersonName"
-                android:textColor="@color/basilPrimary800"
-                android:fontFamily="@font/lekton_bold"
-                android:textSize="14sp"/>
+                app:errorEnabled="true">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Promo Code"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/basilPrimary800"
+                    android:fontFamily="@font/lekton_bold"
+                    android:textSize="14sp"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <LinearLayout

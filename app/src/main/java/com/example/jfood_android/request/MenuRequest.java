@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MenuRequest extends StringRequest {
-    private static final String URL = "http://192.168.1.3:8080/food";
+    private static final String URL = "https://jfood-hanif.herokuapp.com//food";
     private Map<String, String> params;
 
     public MenuRequest(//int id, String name, Seller seller, int price, String category,

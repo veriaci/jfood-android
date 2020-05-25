@@ -27,6 +27,7 @@ import com.example.jfood_android.request.FoodsFetchRequest;
 import com.example.jfood_android.request.OrderRequest;
 import com.example.jfood_android.request.PromoRequest;
 import com.example.jfood_android.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 
 public class OrderActivity extends AppCompatActivity {
 
-    private int currentUserId;
+    private String currentUserId;
     private String currentUserEmail;
 
     ArrayList<Food> foods = new ArrayList<>();
@@ -79,7 +80,7 @@ public class OrderActivity extends AppCompatActivity {
         final TextView textCode = findViewById(R.id.textCode);
 
         final TextView total_price = findViewById(R.id.total_price);
-        final EditText promo_code = findViewById(R.id.promo_code);
+        final TextInputLayout promo_code = findViewById(R.id.promo_code);
 
         final RadioGroup radioGroup = findViewById(R.id.radioGroup);
         //final RadioButton cash = findViewById(R.id.cash);
@@ -91,11 +92,11 @@ public class OrderActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvOrderList.setLayoutManager(layoutManager);
 
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("Retrieving Order...");
 
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         if(pref.contains("currentUserId") || pref.contains("email")){
-            currentUserId = pref.getInt("currentUserId", 0);
+            currentUserId = pref.getString("currentUserId", "");
             currentUserEmail = pref.getString("email", "");
         }
 
@@ -134,8 +135,8 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(selectedPayment.equals("Cashless")){
-                    if (!promo_code.getText().toString().isEmpty()){
-                        promoCode = promo_code.getText().toString();
+                    if (!promo_code.getEditText().getText().toString().isEmpty()){
+                        promoCode = promo_code.getEditText().getText().toString();
 
                         Response.Listener<String> responseListener = new Response.Listener<String>() {
                             @Override
@@ -151,11 +152,13 @@ public class OrderActivity extends AppCompatActivity {
                                             hitung.setVisibility(View.GONE);
                                             pesan.setVisibility(View.VISIBLE);
                                         } else {
-                                            Toast.makeText(OrderActivity.this, "Promo Code not Viable", Toast.LENGTH_SHORT).show();
+                                            promo_code.setError("Promo Code not Viable");
+                                            //Toast.makeText(OrderActivity.this, "Promo Code not Viable", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 } catch (JSONException e){
-                                    Toast.makeText(OrderActivity.this, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
+                                    promo_code.setError("Invalid Promo Code");
+                                    //Toast.makeText(OrderActivity.this, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         };
@@ -187,7 +190,7 @@ public class OrderActivity extends AppCompatActivity {
                 cartDataSource.open();
                 foodIdList = cartDataSource.getAllItem(currentUserEmail);
                 cartDataSource.close();
-                final int customerId = currentUserId;
+                final String customerId = currentUserId;
                 final int ongkir = deliveryFee;
                 final String promo = promoCode;
 

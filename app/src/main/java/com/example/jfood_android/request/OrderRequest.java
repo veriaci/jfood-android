@@ -10,21 +10,14 @@ import java.util.Map;
 
 
 public class OrderRequest extends StringRequest {
-    private static final String URL_CASH = "http://192.168.1.3:8080/invoice/createCashInvoice";
-    private static final String URL_CASHLESS = "http://192.168.1.3:8080/invoice/createCashlessInvoice";
+    private static final String URL_CASH = "https://jfood-hanif.herokuapp.com/invoice/createCashInvoice";
+    private static final String URL_CASHLESS = "https://jfood-hanif.herokuapp.com//invoice/createCashlessInvoice";
     private Map<String, String> params;
 
-    public OrderRequest(ArrayList<Integer> foodIdList, int customerId, int deliveryFee, Response.Listener<String> listener){
+    public OrderRequest(ArrayList<Integer> foodIdList, String customerId, int deliveryFee, Response.Listener<String> listener){
         super(Method.POST, URL_CASH, listener, null);
 
         /*
-        StringBuilder sb = new StringBuilder();
-        for (int i = foodIdList.size() - 1; i >= 0; i--) {
-            int num = foodIdList.get(i);
-            sb.append(num);
-        }
-        String result = sb.toString();
-
         StringBuffer stringBuffer = new StringBuffer();
         int i = 0;
         for ( i = 0; i < foodIdList.size(); i++){
@@ -49,11 +42,11 @@ public class OrderRequest extends StringRequest {
 
         params = new HashMap<>();
         params.put("foodIdList", newString);
-        params.put("customerId", Integer.toString(customerId));
+        params.put("customerId", customerId);
         params.put("deliveryFee", Integer.toString(deliveryFee));
     }
 
-    public OrderRequest(ArrayList<Integer> foodIdList, int customerId, String promoCode, Response.Listener<String> listener){
+    public OrderRequest(ArrayList<Integer> foodIdList, String customerId, String promoCode, Response.Listener<String> listener){
         super(Method.POST, URL_CASHLESS, listener, null);
 
         String[] str= new String[foodIdList.size()];
@@ -68,7 +61,7 @@ public class OrderRequest extends StringRequest {
 
         params = new HashMap<>();
         params.put("foodIdList", newString);
-        params.put("customerId", Integer.toString(customerId));
+        params.put("customerId", customerId);
         params.put("promoCode", promoCode);
     }
 

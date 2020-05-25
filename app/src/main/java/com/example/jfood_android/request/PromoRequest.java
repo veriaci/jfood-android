@@ -7,7 +7,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.Map;
 
 public class PromoRequest extends StringRequest {
-    private static  String URL = "http://192.168.1.3:8080/promo/code/";
+    private static  String URL = "https://jfood-hanif.herokuapp.com//promo/code/";
     public PromoRequest(String promoCode,
                         Response.Listener<String> listener) {
         super(Method.GET, URL + promoCode, listener, null);

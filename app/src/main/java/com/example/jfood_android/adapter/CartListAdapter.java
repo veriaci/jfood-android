@@ -68,31 +68,22 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Custom
         final Food food = foods.get(position);
         final int quantity = foodQuantity.get(position);
 
-        int currentUserId = 0;
+        String currentUserId = "";
         String currentUserEmail = "";
 
         pref = context.getSharedPreferences("user_details", MODE_PRIVATE);
         if(pref.contains("currentUserId") || pref.contains("email")){
-            currentUserId = pref.getInt("currentUserId", 0);
+            currentUserId = pref.getString("currentUserId", "");
             currentUserEmail = pref.getString("email", "");
         }
 
-        final int tempUserId = currentUserId;
+        final String tempUserId = currentUserId;
         final String tempUserEmail = currentUserEmail;
 
         holder.tvFoodName.setText(food.getName());
         holder.tvFoodPrice.setText("Rp. " + food.getPrice());
         holder.tvQuantityIndicator.setText(quantity + " " + (quantity > 1 ? "pcs" : "pc"));
 
-        ColorGenerator generator = ColorGenerator.MATERIAL;
-        int color = generator.getColor(food.getName());
-
-        TextDrawable.IBuilder builder = TextDrawable.builder()
-                .roundRect(15);
-
-        TextDrawable drawable = builder.build(food.getName().substring(0,1), color);
-
-        holder.imageView.setImageDrawable(drawable);
         holder.cvItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,7 +95,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Custom
                 intent.putExtra("foodCategory", food.getCategory());
                 intent.putExtra("foodPrice", food.getPrice());
                 intent.putExtra("foodLocation", food.getSeller().getLocation().getCity());
-                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), holder.tvFoodName, ViewCompat.getTransitionName(holder.tvFoodName));
+                ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) view.getContext(), holder.imageView, ViewCompat.getTransitionName(holder.imageView));
                 view.getContext().startActivity(intent, options.toBundle());
             }
         });

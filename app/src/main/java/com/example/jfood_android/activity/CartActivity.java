@@ -52,7 +52,7 @@ public class CartActivity extends AppCompatActivity{
     CartListAdapter cartListAdapter;
     SharedPreferences pref;
 
-    Integer currentUserId = 0;
+    String currentUserId = "";
     String currentUserEmail = "";
 
     final int deliveryFee = 10000;
@@ -84,11 +84,11 @@ public class CartActivity extends AppCompatActivity{
         rvCartList.setLayoutManager(layoutManager);
 
         //tvTitleBar.setText("My Cart");
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("Fetching Your food cart...");
 
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         if(pref.contains("currentUserId") || pref.contains("email")){
-            currentUserId = pref.getInt("currentUserId", 0);
+            currentUserId = pref.getString("currentUserId", "");
             currentUserEmail = pref.getString("email", "");
         }
 
@@ -104,7 +104,7 @@ public class CartActivity extends AppCompatActivity{
                 dataSource.open();
                 final ArrayList<Integer> reqFoodIdList = dataSource.getAllItem(currentUserEmail);
                 dataSource.close();
-                final int reqCustomerId = currentUserId;
+                final String reqCustomerId = currentUserId;
                 final int reqDeliveryFee = deliveryFee;
 
                 if (totalPrice[0] > 0) {

@@ -27,7 +27,7 @@ import java.util.TimeZone;
 
 public class InvoiceActivity extends AppCompatActivity {
 
-    private int currentUserId = 0;
+    private String currentUserId = "";
     private int currentInvoiceId = 0;
     private String currentFoodName;
 
@@ -109,7 +109,7 @@ public class InvoiceActivity extends AppCompatActivity {
         // Get Intent
         if(getIntent().getExtras() != null){
             Intent intent = getIntent();
-            currentUserId = intent.getIntExtra("currentUserId", 0);
+            currentUserId = intent.getStringExtra("currentUserId");
             currentInvoiceId = intent.getIntExtra("currentInvoiceId", 0);
         }
 

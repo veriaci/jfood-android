@@ -22,7 +22,6 @@
         <TextView
             android:id="@+id/tvMakanName"
             android:text="Food JFood"
-            android:transitionName="example_transition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
@@ -43,6 +42,7 @@
 
         <ImageView
             android:id="@+id/imgMakan"
+            android:transitionName="example_transition"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/pizza"/>

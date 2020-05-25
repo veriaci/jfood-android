@@ -20,7 +20,7 @@ import com.example.jfood_android.database.CartDataSource;
 
 public class FoodActivity extends AppCompatActivity {
 
-    private int currentUserId;
+    private String currentUserId;
     private String currentUserEmail;
 
     private TextView tvMakanName;
@@ -53,7 +53,6 @@ public class FoodActivity extends AppCompatActivity {
         // set an exit transition
         //getWindow().setExitTransition(new Fade());
 
-
         tvMakanName = findViewById(R.id.tvMakanName);
         imgMakan = findViewById(R.id.imgMakan);
         tvMakanLocation = findViewById(R.id.tvMakanLocation);
@@ -64,7 +63,7 @@ public class FoodActivity extends AppCompatActivity {
 
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
         if(pref.contains("currentUserId") || pref.contains("email")){
-            currentUserId = pref.getInt("currentUserId", 0);
+            currentUserId = pref.getString("currentUserId", "");
             currentUserEmail = pref.getString("email", "");
         }
 

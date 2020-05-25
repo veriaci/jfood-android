@@ -4,9 +4,9 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
 public class InvoiceFetchRequest extends StringRequest {
-    public static final String URL_GET_INVOICE = "http://192.168.1.3:8080/invoice/customer/";
+    public static final String URL_GET_INVOICE = "https://jfood-hanif.herokuapp.com//invoice/customer/";
 
-    public InvoiceFetchRequest(int id, Response.Listener<String> listener) {
+    public InvoiceFetchRequest(String id, Response.Listener<String> listener) {
         super(URL_GET_INVOICE + id, listener, null);
     }
 }
