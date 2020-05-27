@@ -1,7 +1,6 @@
 package com.example.jfood_android.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,19 +8,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.jfood_android.activity.HistoryActivity;
-import com.example.jfood_android.activity.InvoiceActivity;
-import com.example.jfood_android.activity.MainActivity;
-import com.example.jfood_android.model.Food;
 import com.example.jfood_android.R;
-import com.example.jfood_android.model.Invoice;
-import com.example.jfood_android.request.InvoiceFetchRequest;
 import com.example.jfood_android.request.InvoiceIdRequest;
 
 import org.json.JSONArray;
@@ -35,9 +27,9 @@ import java.util.TimeZone;
 
 public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.HistoryViewHolder> {
 
-    Context context;
-    ArrayList<Integer> invoiceIdList;
-    Integer currentInvoiceId = 0;
+    private Context context;
+    private ArrayList<Integer> invoiceIdList;
+    private Integer currentInvoiceId = 0;
 
     public HistoryListAdapter(Context context, ArrayList<Integer> invoiceIdList){
         this.context = context;
@@ -54,7 +46,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.history_item, parent, false);
-        return new HistoryListAdapter.HistoryViewHolder(view);
+        return new HistoryViewHolder(view);
         // return null;
     }
 
@@ -68,56 +60,48 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
             public void onResponse(String response) {
                 try{
                     JSONObject invoice = new JSONObject(response);
-                    //if(jsonArray != null){
                         // Get Invoice
-                        //Toast.makeText(InvoiceActivity.this, ("Test length: " + jsonArray.length()), Toast.LENGTH_SHORT).show();
-                        //for (int i = jsonArray.length()-1; i < jsonArray.length(); i++){
-                        //JSONObject invoice = jsonArray.getJSONObject(jsonArray.length()-1);
-                        if(invoice.getString("invoiceStatus").equals("Ongoing")) {
+                        //Toast.makeText(context, ("Test length: " + invoice.length()), Toast.LENGTH_SHORT).show();
+                        int invoiceId = invoice.getInt("id");
+                        String invoiceStatus = invoice.getString("invoiceStatus");
+                        String paymentType = invoice.getString("paymentType");
+                        int totalPrice = invoice.getInt("totalPrice");
+                        JSONObject customer = invoice.getJSONObject("customer");
+                        String customerName = customer.getString("name");
+                        JSONArray foods = invoice.getJSONArray("foods");
 
-                            int invoiceId = invoice.getInt("id");
-                            //String foods = invoice.getString("foods");
-                            String invoiceStatus = invoice.getString("invoiceStatus");
-                            String paymentType = invoice.getString("paymentType");
-                            int totalPrice = invoice.getInt("totalPrice");
-                            JSONObject customer = invoice.getJSONObject("customer");
-                            String customerName = customer.getString("name");
-                            //foods = foods.substring(1, foods.length()-1);
-                            JSONArray foods = invoice.getJSONArray("foods");
-
-                            StringBuffer stringBuffer = new StringBuffer();
-                            String foodName = "";
-                            for (int j = 0; j < foods.length(); j++) {
-                                JSONObject food = foods.getJSONObject(j);
-                                stringBuffer.append(food.getString("name"));
-                                if (j+1 != foods.length()){
-                                    stringBuffer.append(", ");
-                                }
+                        StringBuffer stringBuffer = new StringBuffer();
+                        String foodName = "";
+                        for (int j = 0; j < foods.length(); j++) {
+                            JSONObject food = foods.getJSONObject(j);
+                            stringBuffer.append(food.getString("name"));
+                            if (j+1 != foods.length()){
+                                stringBuffer.append(", ");
                             }
-                            foodName = stringBuffer.toString();
-
-                            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
-                            formatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
-                            //String date = invoice.getString("date");
-                            try {
-                                Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(invoice.getString("date"));
-                                finalHolder.tvHistoryDate.setText(formatter.format(date));
-                            } catch (Exception e){
-                                Toast.makeText(context, ("Date Parsing Error"), Toast.LENGTH_SHORT).show();
-                            }
-
-                            finalHolder.tvHistoryId.setText(Integer.toString(invoiceId));
-                            finalHolder.tvHistoryCustomer.setText(customerName);
-                            finalHolder.tvHistoryFood.setText(foodName);
-                            finalHolder.tvHistoryType.setText(paymentType);
-                            finalHolder.tvHistoryStatus.setText(invoiceStatus);
-                            finalHolder.tvHistoryTotalPrice.setText("Rp. " + (totalPrice));
-
-                            if (currentInvoiceId == 0) {
-                                currentInvoiceId = invoiceId;
-                            }
-                            Toast.makeText(context, ("Invoice: " + currentInvoiceId), Toast.LENGTH_SHORT).show();
                         }
+                        foodName = stringBuffer.toString();
+
+                        SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+                        formatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
+                        try {
+                            Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(invoice.getString("date"));
+                            finalHolder.tvHistoryDate.setText(formatter.format(date));
+                        } catch (Exception e){
+                            Toast.makeText(context, ("Date Parsing Error"), Toast.LENGTH_SHORT).show();
+                        }
+
+                        finalHolder.tvHistoryId.setText(Integer.toString(invoiceId));
+                        finalHolder.tvHistoryCustomer.setText(customerName);
+                        finalHolder.tvHistoryFood.setText(foodName);
+                        finalHolder.tvHistoryType.setText(paymentType);
+                        finalHolder.tvHistoryStatus.setText(invoiceStatus);
+                        finalHolder.tvHistoryTotalPrice.setText("Rp. " + (totalPrice));
+
+                        if (currentInvoiceId == 0) {
+                            currentInvoiceId = invoiceId;
+                        }
+                        //Toast.makeText(context, ("Invoice: " + currentInvoiceId), Toast.LENGTH_SHORT).show();
+
                 } catch (JSONException e){
                     Toast.makeText(context, "Failed to Get the Invoice", Toast.LENGTH_SHORT).show();
                 }
@@ -136,7 +120,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         return 0;
     }
 
-    public class HistoryViewHolder extends RecyclerView.ViewHolder {
+    static class HistoryViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvHistory;
         TextView tvHistoryId;
         TextView tvHistoryCustomer;
@@ -146,7 +130,7 @@ public class HistoryListAdapter extends RecyclerView.Adapter<HistoryListAdapter.
         TextView tvHistoryStatus;
         TextView tvHistoryTotalPrice;
 
-        public HistoryViewHolder(@NonNull View orderView) {
+        HistoryViewHolder(@NonNull View orderView) {
             super(orderView);
             rvHistory = orderView.findViewById(R.id.rvHistoryList);
             tvHistoryId = orderView.findViewById(R.id.tvHistoryId);

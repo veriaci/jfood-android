@@ -3,11 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.OrderActivity"
     android:orientation="vertical"
     android:theme="@style/Basil"
     android:background="@color/basilBackground">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -101,7 +102,6 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/lekton_regular"
-            android:layout_marginBottom="3dp"
             android:text="SubTotal:" />
         <TextView
             android:id="@+id/tvOrderSubTotal"
@@ -109,7 +109,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="75dp"
             android:fontFamily="@font/lekton_bold"
-            android:layout_marginBottom="3dp"
             android:text="TextView" />
     </LinearLayout>
 
@@ -117,5 +116,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
         android:background="@color/basilPrimary100"/>
 </LinearLayout>

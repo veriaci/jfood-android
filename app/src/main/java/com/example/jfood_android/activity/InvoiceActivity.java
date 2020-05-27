@@ -29,7 +29,6 @@ public class InvoiceActivity extends AppCompatActivity {
 
     private String currentUserId = "";
     private int currentInvoiceId = 0;
-    private String currentFoodName;
 
     TextView staticInvoiceId;
     TextView staticInvoiceCustomer;
@@ -184,80 +183,75 @@ public class InvoiceActivity extends AppCompatActivity {
                             btnInvoiceBatal.setVisibility(View.GONE);
                             btnInvoiceSelesai.setVisibility(View.GONE);
                         }
-                        //for (int i = jsonArray.length()-1; i < jsonArray.length(); i++){
-                            JSONObject invoice = jsonArray.getJSONObject(jsonArray.length()-1);
-                            if(invoice.getString("invoiceStatus").equals("Ongoing")) {
-                                // Set Visibility to Visible
-                                staticInvoiceId.setVisibility(View.VISIBLE);
-                                staticInvoiceCustomer.setVisibility(View.VISIBLE);
-                                staticInvoiceFood.setVisibility(View.VISIBLE);
-                                staticInvoiceDate.setVisibility(View.VISIBLE);
-                                staticInvoiceType.setVisibility(View.VISIBLE);
-                                staticInvoiceStatus.setVisibility(View.VISIBLE);
-                                staticInvoiceTotalPrice.setVisibility(View.VISIBLE);
+                        JSONObject invoice = jsonArray.getJSONObject(jsonArray.length()-1);
+                        if(invoice.getString("invoiceStatus").equals("Ongoing")) {
+                            // Set Visibility to Visible
+                            staticInvoiceId.setVisibility(View.VISIBLE);
+                            staticInvoiceCustomer.setVisibility(View.VISIBLE);
+                            staticInvoiceFood.setVisibility(View.VISIBLE);
+                            staticInvoiceDate.setVisibility(View.VISIBLE);
+                            staticInvoiceType.setVisibility(View.VISIBLE);
+                            staticInvoiceStatus.setVisibility(View.VISIBLE);
+                            staticInvoiceTotalPrice.setVisibility(View.VISIBLE);
 
-                                tvInvoiceId.setVisibility(View.VISIBLE);
-                                tvInvoiceCustomer.setVisibility(View.VISIBLE);
-                                tvInvoiceFood.setVisibility(View.VISIBLE);
-                                tvInvoiceDate.setVisibility(View.VISIBLE);
-                                tvInvoiceType.setVisibility(View.VISIBLE);
-                                tvInvoiceStatus.setVisibility(View.VISIBLE);
-                                tvInvoiceTotalPrice.setVisibility(View.VISIBLE);
+                            tvInvoiceId.setVisibility(View.VISIBLE);
+                            tvInvoiceCustomer.setVisibility(View.VISIBLE);
+                            tvInvoiceFood.setVisibility(View.VISIBLE);
+                            tvInvoiceDate.setVisibility(View.VISIBLE);
+                            tvInvoiceType.setVisibility(View.VISIBLE);
+                            tvInvoiceStatus.setVisibility(View.VISIBLE);
+                            tvInvoiceTotalPrice.setVisibility(View.VISIBLE);
 
-                                tvKosong.setVisibility(View.GONE);
-                                tvJudul.setVisibility(View.VISIBLE);
-                                btnInvoiceBatal.setVisibility(View.VISIBLE);
-                                btnInvoiceSelesai.setVisibility(View.VISIBLE);
+                            tvKosong.setVisibility(View.GONE);
+                            tvJudul.setVisibility(View.VISIBLE);
+                            btnInvoiceBatal.setVisibility(View.VISIBLE);
+                            btnInvoiceSelesai.setVisibility(View.VISIBLE);
 
-                                int invoiceId = invoice.getInt("id");
-                                //String foods = invoice.getString("foods");
-                                String invoiceStatus = invoice.getString("invoiceStatus");
-                                String paymentType = invoice.getString("paymentType");
-                                int totalPrice = invoice.getInt("totalPrice");
-                                JSONObject customer = invoice.getJSONObject("customer");
-                                String customerName = customer.getString("name");
-                                //foods = foods.substring(1, foods.length()-1);
-                                JSONArray foods = invoice.getJSONArray("foods");
+                            int invoiceId = invoice.getInt("id");
+                            String invoiceStatus = invoice.getString("invoiceStatus");
+                            String paymentType = invoice.getString("paymentType");
+                            int totalPrice = invoice.getInt("totalPrice");
+                            JSONObject customer = invoice.getJSONObject("customer");
+                            String customerName = customer.getString("name");
+                            JSONArray foods = invoice.getJSONArray("foods");
 
-                                StringBuffer stringBuffer = new StringBuffer();
-                                String foodName = "";
-                                for (int j = 0; j < foods.length(); j++) {
-                                    JSONObject food = foods.getJSONObject(j);
-                                    stringBuffer.append(food.getString("name"));
-                                    if (j+1 != foods.length()){
-                                        stringBuffer.append(", ");
-                                    }
+                            StringBuffer stringBuffer = new StringBuffer();
+                            String foodName = "";
+                            for (int j = 0; j < foods.length(); j++) {
+                                JSONObject food = foods.getJSONObject(j);
+                                stringBuffer.append(food.getString("name"));
+                                if (j+1 != foods.length()){
+                                    stringBuffer.append(", ");
                                 }
-                                foodName = stringBuffer.toString();
-
-                                SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
-                                formatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
-                                //String date = invoice.getString("date");
-                                try {
-                                    Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(invoice.getString("date"));
-                                    tvInvoiceDate.setText(formatter.format(date));
-                                } catch (Exception e){
-                                    Toast.makeText(InvoiceActivity.this, ("Date Parsing Error"), Toast.LENGTH_SHORT).show();
-                                }
-
-                                tvInvoiceId.setText(Integer.toString(invoiceId));
-                                tvInvoiceCustomer.setText(customerName);
-                                tvInvoiceFood.setText(foodName);
-                                tvInvoiceType.setText(paymentType);
-                                tvInvoiceStatus.setText(invoiceStatus);
-                                tvInvoiceTotalPrice.setText(Integer.toString(totalPrice));
-
-                                if (currentInvoiceId == 0) {
-                                    currentInvoiceId = invoiceId;
-                                }
-                                Toast.makeText(InvoiceActivity.this, ("Invoice: " + currentInvoiceId), Toast.LENGTH_SHORT).show();
-                            } else {
-                                tvKosong.setVisibility(View.VISIBLE);
-                                tvJudul.setVisibility(View.GONE);
-                                btnInvoiceBatal.setVisibility(View.GONE);
-                                btnInvoiceSelesai.setVisibility(View.GONE);
                             }
-                        //}
+                            foodName = stringBuffer.toString();
+
+                            SimpleDateFormat formatter = new SimpleDateFormat("EEEE, dd MMMM yyyy");
+                            formatter.setTimeZone(TimeZone.getTimeZone("Asia/Jakarta"));
+                            try {
+                                Date date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(invoice.getString("date"));
+                                tvInvoiceDate.setText(formatter.format(date));
+                            } catch (Exception e){
+                                Toast.makeText(InvoiceActivity.this, ("Date Parsing Error"), Toast.LENGTH_SHORT).show();
+                            }
+
+                            tvInvoiceId.setText(Integer.toString(invoiceId));
+                            tvInvoiceCustomer.setText(customerName);
+                            tvInvoiceFood.setText(foodName);
+                            tvInvoiceType.setText(paymentType);
+                            tvInvoiceStatus.setText(invoiceStatus);
+                            tvInvoiceTotalPrice.setText(Integer.toString(totalPrice));
+
+                            if (currentInvoiceId == 0) {
+                                currentInvoiceId = invoiceId;
+                            }
+                            //Toast.makeText(InvoiceActivity.this, ("Invoice: " + currentInvoiceId), Toast.LENGTH_SHORT).show();
+                        } else {
+                            tvKosong.setVisibility(View.VISIBLE);
+                            tvJudul.setVisibility(View.GONE);
+                            btnInvoiceBatal.setVisibility(View.GONE);
+                            btnInvoiceSelesai.setVisibility(View.GONE);
+                        }
                     } else {
                         Toast.makeText(InvoiceActivity.this, "Fetch JSON empty", Toast.LENGTH_SHORT).show();
                     }

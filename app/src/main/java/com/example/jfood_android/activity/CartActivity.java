@@ -34,8 +34,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class CartActivity extends AppCompatActivity{
-    ImageButton btnBack;
-    TextView tvTitleBar;
     CartDataSource dataSource;
     ArrayList<Food> foods = new ArrayList<>();
     ArrayList<Integer> foodIdList = new ArrayList<>();
@@ -63,14 +61,6 @@ public class CartActivity extends AppCompatActivity{
         setContentView(R.layout.activity_cart);
 
         dataSource = new CartDataSource(this);
-
-        //getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        //getSupportActionBar().setDisplayShowCustomEnabled(true);
-        //getSupportActionBar().setCustomView(R.layout.action_bar_layout);
-        //View view = getSupportActionBar().getCustomView();
-
-        //btnBack = view.findViewById(R.id.btn_back);
-        //tvTitleBar = view.findViewById(R.id.tv_title_bar);
         progressDialog = new ProgressDialog(this);
         rvCartList = findViewById(R.id.rv_cart_list);
         btnProcessCart = findViewById(R.id.btn_process_cart);
@@ -81,7 +71,6 @@ public class CartActivity extends AppCompatActivity{
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvCartList.setLayoutManager(layoutManager);
 
-        //tvTitleBar.setText("My Cart");
         progressDialog.setMessage("Fetching Your food cart...");
 
         pref = getSharedPreferences("user_details", MODE_PRIVATE);
@@ -92,54 +81,14 @@ public class CartActivity extends AppCompatActivity{
 
         cartListAdapter = new CartListAdapter(this, foods, foodQuantity, totalPrice, tvTotalPrice);
         rvCartList.setAdapter(cartListAdapter);
-        //rvCartList.setAdapter(cartListAdapter);
 
         btnProcessCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("my_cart", "total: " + (totalPrice[0] + deliveryFee));
 
-                dataSource.open();
-                final ArrayList<Integer> reqFoodIdList = dataSource.getAllItem(currentUserEmail);
-                dataSource.close();
-                final String reqCustomerId = currentUserId;
-                final int reqDeliveryFee = deliveryFee;
-
                 if (totalPrice[0] > 0) {
-                    /*
-                    // Response Listener
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                if (jsonObject != null){
-                                    Toast.makeText(CartActivity.this, "Order made", Toast.LENGTH_SHORT).show();
-                                    dataSource.open();
-                                    dataSource.clearCart(currentUserEmail);
-                                    dataSource.close();
-                                    Intent intent = new Intent(CartActivity.this, MainActivity.class);
-                                    intent.putExtra("currentUserId", currentUserId);
-                                    startActivity(intent);
-                                }
-                            } catch (JSONException e){
-                                Toast.makeText(CartActivity.this, "Order failed to be made", Toast.LENGTH_SHORT).show();
-                                Toast.makeText(CartActivity.this, ("foodIdList: " + reqFoodIdList), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(CartActivity.this, ("currentUserId: " + reqCustomerId), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(CartActivity.this, ("deliveryFee: " + reqDeliveryFee), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    };
-
-                    // Request Baru
-                    OrderRequest buatRequest = new OrderRequest(reqFoodIdList, reqCustomerId, reqDeliveryFee, responseListener);
-
-                    // Queue Baru
-                    RequestQueue queue = Volley.newRequestQueue(CartActivity.this);
-                    queue.add(buatRequest);
-                    */
                     Intent intent = new Intent(CartActivity.this, OrderActivity.class);
-                    //startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(CartActivity.this).toBundle());
                     ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(CartActivity.this, btnProcessCart, ViewCompat.getTransitionName(btnProcessCart));
                     startActivity(intent, options.toBundle());
 
@@ -212,7 +161,6 @@ public class CartActivity extends AppCompatActivity{
                             Food gFood = gson.fromJson(stringFood, Food.class);
 
                             //System.out.println(gFood);
-
                             foods.add(gFood);
                         }
                         cartListAdapter.setFoods(foods, foodQuantity);
@@ -256,7 +204,6 @@ public class CartActivity extends AppCompatActivity{
                 foodQuantity.add(qty);
             }
         }
-
         return ret;
     }
 

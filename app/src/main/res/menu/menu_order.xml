@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_history_basil_24dp"
+        android:title="History"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_promo"
+        android:icon="@drawable/ic_attach_money_basil_24dp"
+        android:title="Promo"
+        app:showAsAction="ifRoom"/>
+
+</menu>

@@ -1,18 +1,14 @@
 package com.example.jfood_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityOptionsCompat;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +25,6 @@ import org.json.JSONObject;
 public class LoginActivity extends AppCompatActivity {
     private String id;
     SharedPreferences pref;
-    Intent mainIntent;
     ProgressDialog progressDialog;
 
     @Override
@@ -37,8 +32,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        //setSupportActionBar(myToolbar);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Logging In...");
 
@@ -73,7 +66,6 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.putString("password", password);
                                 editor.putString("currentUserId", id);
                                 editor.commit();
-                                //mainIntent.putExtra("currentUserId", id);
                                 progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                                 startActivity(mainIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(LoginActivity.this).toBundle());
@@ -88,14 +80,6 @@ public class LoginActivity extends AppCompatActivity {
                 LoginRequest loginRequest = new LoginRequest(email, password, responseListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
-
-                /*
-                if(email.equals("test@test.com") && password.equals("test")){
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
-                }
-                 */
             }
         });
 

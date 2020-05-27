@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.HistoryActivity"
     android:orientation="vertical"
     android:theme="@style/Basil"
     android:background="@color/basilBackground">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticHistoryId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ID Invoice:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvHistoryId"
@@ -29,23 +29,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticHistoryCustomer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Customer:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvHistoryCustomer"
@@ -54,24 +52,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticHistoryFood"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Nama Makanan:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvHistoryFood"
@@ -80,24 +75,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticHistoryDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tanggal Invoice:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvHistoryDate"
@@ -106,24 +98,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticHistoryType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Tipe Invoice:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvHistoryType"
@@ -132,24 +121,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticHistoryStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Status Invoice:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvHistoryStatus"
@@ -158,23 +144,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticHistoryTotalPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Total Biaya:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"/>
+            android:ems="10"/>
         <TextView
             android:id="@+id/tvHistoryTotalPrice"
             android:layout_width="wrap_content"
@@ -182,14 +166,14 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
         android:background="@color/basilPrimary100"/>
 
 </LinearLayout>

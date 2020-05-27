@@ -92,7 +92,6 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
         txtListChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //String locloc = food.getSeller().getLocation().getCity();
                 //Toast.makeText(_context, (locloc), Toast.LENGTH_SHORT).show();
                 Intent foodIntent = new Intent(_context, FoodActivity.class);
                 foodIntent.putExtra("currentUserId", tempUserId);
@@ -101,10 +100,8 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
                 foodIntent.putExtra("foodCategory", food.getCategory());
                 foodIntent.putExtra("foodPrice", food.getPrice());
                 foodIntent.putExtra("foodLocation", food.getSeller().getLocation().getCity());
-                //_context.startActivity(foodIntent);
                 ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation((Activity) _context, lbListImage, ViewCompat.getTransitionName(lbListImage));
                 _context.startActivity(foodIntent, options.toBundle());
-                //return false;
             }
         });
 
@@ -170,7 +167,7 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
         return true;
     }
 
-    public void addItem(String currentUserEmail, int foodId, int foodPrice){
+    private void addItem(String currentUserEmail, int foodId, int foodPrice){
         CartDataSource cartDataSource = new CartDataSource(_context);
         cartDataSource.open();
         cartDataSource.addItem(currentUserEmail,foodId,foodPrice);
@@ -203,12 +200,10 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
                     filteredList.put(entry.getKey(),filteredFood);
                 }
             }
-
             FilterResults results = new FilterResults();
             results.values = filteredList;
 
             return results;
-            //return null;
         }
 
         @Override

@@ -16,9 +16,9 @@ import java.util.ArrayList;
 
 public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.OrderViewHolder> {
 
-    Context context;
-    ArrayList<Food> foods;
-    ArrayList<Integer> foodQuantity;
+    private Context context;
+    private ArrayList<Food> foods;
+    private ArrayList<Integer> foodQuantity;
 
     public OrderListAdapter(Context context, ArrayList<Food> foods, ArrayList<Integer> foodQuantity ){
         this.context = context;
@@ -37,7 +37,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
     public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.order_item, parent, false);
-        return new OrderListAdapter.OrderViewHolder(view);
+        return new OrderViewHolder(view);
         // return null;
     }
 
@@ -61,7 +61,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         return 0;
     }
 
-    public class OrderViewHolder extends RecyclerView.ViewHolder {
+    static class OrderViewHolder extends RecyclerView.ViewHolder {
         RecyclerView rvOrder;
         TextView tvOrderName;
         TextView tvOrderPrice;
@@ -69,7 +69,7 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.Orde
         TextView tvOrderQuantity;
         TextView tvOrderSubTotal;
 
-        public OrderViewHolder(@NonNull View orderView) {
+        OrderViewHolder(@NonNull View orderView) {
             super(orderView);
             rvOrder = orderView.findViewById(R.id.rvOrderList);
             tvOrderName = orderView.findViewById(R.id.tvOrderName);

@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InvoiceStatusRequest extends StringRequest {
-    public static final String URL_CANCELED_INVOICE = "https://jfood-hanif.herokuapp.com//invoice/invoiceStatus/";
+    public static final String URL_CANCELED_INVOICE = "https://jfood-hanif.herokuapp.com/invoice/invoiceStatus/";
     private Map<String, String> params;
 
     public InvoiceStatusRequest(int id, String invoiceStatus, Response.Listener<String> listener) {

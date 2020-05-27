@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             currentUserId = pref.getString("currentUserId", "");
         }
 
-        Toast.makeText(MainActivity.this, ("Current Id = " + currentUserId), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, ("Current Id = " + currentUserId), Toast.LENGTH_SHORT).show();
 
         /*
         expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener(){
@@ -199,10 +199,8 @@ public class MainActivity extends AppCompatActivity {
         queue.add(menuRequest);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //return super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         MenuItem searchItem = menu.findItem(R.id.action_search);
@@ -250,7 +248,6 @@ public class MainActivity extends AppCompatActivity {
                 // If we got here, the user's action was not recognized.
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
-
         }
     }
 }

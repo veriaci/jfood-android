@@ -9,6 +9,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -45,8 +47,6 @@ public class OrderActivity extends AppCompatActivity {
     ArrayList<Integer> foodQuantity = new ArrayList<>();
     private int totalPrice;
 
-    private int foodId;
-    private int foodPrice;
     private int deliveryFee = 10000;
     private String promoCode;
     private String selectedPayment = "";
@@ -60,10 +60,6 @@ public class OrderActivity extends AppCompatActivity {
     OrderListAdapter orderListAdapter;
     SharedPreferences pref;
 
-    //TextView total_price;
-    //EditText promo_code;
-    //Button addToCart;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,18 +70,12 @@ public class OrderActivity extends AppCompatActivity {
 
         // find View
         final RecyclerView rvOrderList = findViewById(R.id.rvOrderList);
-        //final TextView pesanan = findViewById(R.id.pesanan);
         final TextView textCode = findViewById(R.id.textCode);
-
         final TextView total_price = findViewById(R.id.total_price);
         final TextInputLayout promo_code = findViewById(R.id.promo_code);
-
         final RadioGroup radioGroup = findViewById(R.id.radioGroup);
-        //final RadioButton cash = findViewById(R.id.cash);
-        //final RadioButton cashless = findViewById(R.id.cashless);
         final Button hitung = findViewById(R.id.hitung);
         final Button pesan = findViewById(R.id.pesan);
-        //addToCart = findViewById(R.id.addToCart);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rvOrderList.setLayoutManager(layoutManager);
@@ -105,7 +95,6 @@ public class OrderActivity extends AppCompatActivity {
         textCode.setVisibility(View.GONE);
         promo_code.setVisibility(View.GONE);
         pesan.setVisibility(View.GONE);
-        //addToCart.setVisibility(View.GONE);
 
         // memberikan nilai
         total_price.setText("0");
@@ -151,12 +140,10 @@ public class OrderActivity extends AppCompatActivity {
                                             pesan.setVisibility(View.VISIBLE);
                                         } else {
                                             promo_code.setError("Promo Code not Viable");
-                                            //Toast.makeText(OrderActivity.this, "Promo Code not Viable", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 } catch (JSONException e){
                                     promo_code.setError("Invalid Promo Code");
-                                    //Toast.makeText(OrderActivity.this, "Invalid Promo Code", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         };
@@ -184,16 +171,12 @@ public class OrderActivity extends AppCompatActivity {
                 //Toast.makeText(OrderActivity.this, ("PEsan ongkir = " + deliveryFee), Toast.LENGTH_SHORT).show();
                 //Toast.makeText(OrderActivity.this, ("PEsan promoCode = " + promoCode), Toast.LENGTH_SHORT).show();
 
-                //final ArrayList<Integer> foodIdList = new ArrayList<>();
                 cartDataSource.open();
                 foodIdList = cartDataSource.getAllItem(currentUserEmail);
                 cartDataSource.close();
                 final String customerId = currentUserId;
                 final int ongkir = deliveryFee;
                 final String promo = promoCode;
-
-                //foodIdList.add(foodId);
-                //foodIdList.add(foodId);
 
                 // Response Listener
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -232,22 +215,6 @@ public class OrderActivity extends AppCompatActivity {
                 queue.add(buatRequest);
             }
         });
-
-        /*
-        addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                cartDataSource.open();
-                if ((cartDataSource.addItem(currentUserEmail,foodId,foodPrice))){
-                    Toast.makeText(OrderActivity.this, "Item added to cart", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(OrderActivity.this, "Failed to adding item", Toast.LENGTH_SHORT).show();
-                }
-                cartDataSource.close();
-            }
-        });
-
-         */
     }
 
     @Override
@@ -264,7 +231,6 @@ public class OrderActivity extends AppCompatActivity {
         progressDialog.show();
 
         getOrderData();
-        //addToCart.setVisibility(View.GONE);
 
         if(!foodIdList.isEmpty()){
             getOrderList();
@@ -289,7 +255,6 @@ public class OrderActivity extends AppCompatActivity {
                 foodQuantity.add(qty);
             }
         }
-
         return ret;
     }
 
@@ -314,7 +279,6 @@ public class OrderActivity extends AppCompatActivity {
         cartDataSource.open();
         foodIdList = removeDuplicates(cartDataSource.getAllItem(currentUserEmail));
         totalPrice = cartDataSource.getTotalPrice(currentUserEmail);
-        //total_price.setText("Rp. " + cartDataSource.getTotalPrice(currentUserEmail));
         cartDataSource.close();
     }
 
@@ -336,7 +300,6 @@ public class OrderActivity extends AppCompatActivity {
                             Food gFood = gson.fromJson(stringFood, Food.class);
 
                             //System.out.println(gFood);
-
                             foods.add(gFood);
                         }
                         orderListAdapter.setFoods(foods, foodQuantity);
@@ -368,5 +331,35 @@ public class OrderActivity extends AppCompatActivity {
         FoodsFetchRequest FoodsFetchRequest = new FoodsFetchRequest(foodIdString, responseListener);
         RequestQueue queue = Volley.newRequestQueue(OrderActivity.this);
         queue.add(FoodsFetchRequest);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_order, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_history:
+                Intent historyIntent = new Intent(OrderActivity.this, HistoryActivity.class);
+                historyIntent.putExtra("currentUserId", currentUserId);
+                startActivity(historyIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                return true;
+
+            case R.id.action_promo:
+                Intent promoIntent = new Intent(OrderActivity.this, PromoActivity.class);
+                promoIntent.putExtra("currentUserId", currentUserId);
+                startActivity(promoIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                return true;
+
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

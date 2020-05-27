@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_basil_24dp"
-        android:title="Search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="ifRoom|collapseActionView"/>
-
-    <item
         android:id="@+id/action_cart"
         android:icon="@drawable/ic_shopping_cart_basil_24dp"
         android:title="Cart"
@@ -18,11 +11,13 @@
     <item
         android:id="@+id/action_history"
         android:icon="@drawable/ic_history_basil_24dp"
-        android:title="History"/>
+        android:title="History"
+        app:showAsAction="ifRoom"/>
 
     <item
         android:id="@+id/action_promo"
         android:icon="@drawable/ic_attach_money_basil_24dp"
-        android:title="Promo"/>
+        android:title="Promo"
+        app:showAsAction="ifRoom"/>
 
 </menu>

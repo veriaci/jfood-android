@@ -8,18 +8,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MenuRequest extends StringRequest {
-    private static final String URL = "https://jfood-hanif.herokuapp.com//food";
+    private static final String URL = "https://jfood-hanif.herokuapp.com/food";
     private Map<String, String> params;
 
-    public MenuRequest(//int id, String name, Seller seller, int price, String category,
-                       Response.Listener<String> listener){
+    public MenuRequest(Response.Listener<String> listener){
         super(Method.GET, URL, listener, null);
         params = new HashMap<>();
-        //params.put("id", Integer.toString(id));
-        //params.put("name", name);
-        //params.put("seller", java.lang.String.valueOf(seller));
-        //params.put("price", Integer.toString(price));
-        //params.put("category", category);
     }
 
     @Override

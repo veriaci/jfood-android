@@ -4,7 +4,6 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.StringRequest;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,7 +16,6 @@ public class OrderRequest extends StringRequest {
     public OrderRequest(ArrayList<Integer> foodIdList, String customerId, int deliveryFee, Response.Listener<String> listener){
         super(Method.POST, URL_CASH, listener, null);
 
-        /*
         StringBuffer stringBuffer = new StringBuffer();
         int i = 0;
         for ( i = 0; i < foodIdList.size(); i++){
@@ -29,19 +27,8 @@ public class OrderRequest extends StringRequest {
         }
         String foodIdString = stringBuffer.toString();
 
-*/
-        String[] str= new String[foodIdList.size()];
-        Object[] objArr = foodIdList.toArray();
-        int i = 0;
-        for(Object obj : objArr)
-        {
-            str[i++] = Integer.toString((Integer)obj);
-        }
-        String newString = Arrays.toString(str);
-        newString = newString.substring(1, newString.length()-1);
-
         params = new HashMap<>();
-        params.put("foodIdList", newString);
+        params.put("foodIdList", foodIdString);
         params.put("customerId", customerId);
         params.put("deliveryFee", Integer.toString(deliveryFee));
     }
@@ -49,18 +36,19 @@ public class OrderRequest extends StringRequest {
     public OrderRequest(ArrayList<Integer> foodIdList, String customerId, String promoCode, Response.Listener<String> listener){
         super(Method.POST, URL_CASHLESS, listener, null);
 
-        String[] str= new String[foodIdList.size()];
-        Object[] objArr = foodIdList.toArray();
+        StringBuffer stringBuffer = new StringBuffer();
         int i = 0;
-        for(Object obj : objArr)
-        {
-            str[i++] = Integer.toString((Integer)obj);
+        for ( i = 0; i < foodIdList.size(); i++){
+            int foodId = foodIdList.get(i);
+            stringBuffer.append(foodId);
+            if (i+1 != foodIdList.size()){
+                stringBuffer.append(",");
+            }
         }
-        String newString = Arrays.toString(str);
-        newString = newString.substring(1, newString.length()-1);
+        String foodIdString = stringBuffer.toString();
 
         params = new HashMap<>();
-        params.put("foodIdList", newString);
+        params.put("foodIdList", foodIdString);
         params.put("customerId", customerId);
         params.put("promoCode", promoCode);
     }

@@ -1,16 +1,14 @@
 package com.example.jfood_android.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.transition.Explode;
-import android.transition.Fade;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,13 +44,6 @@ public class FoodActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food);
-
-        // inside your activity (if you did not enable transitions in your theme)
-        //getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-
-        // set an exit transition
-        //getWindow().setExitTransition(new Fade());
-
         tvMakanName = findViewById(R.id.tvMakanName);
         imgMakan = findViewById(R.id.imgMakan);
         tvMakanLocation = findViewById(R.id.tvMakanLocation);
@@ -107,8 +98,7 @@ public class FoodActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //return super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_food, menu);
         return true;
     }
 
@@ -119,6 +109,18 @@ public class FoodActivity extends AppCompatActivity {
                 Intent intent = new Intent(FoodActivity.this, CartActivity.class);
                 intent.putExtra("currentUserId", currentUserId);
                 startActivity(intent);
+                return true;
+
+            case R.id.action_history:
+                Intent historyIntent = new Intent(FoodActivity.this, HistoryActivity.class);
+                historyIntent.putExtra("currentUserId", currentUserId);
+                startActivity(historyIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                return true;
+
+            case R.id.action_promo:
+                Intent promoIntent = new Intent(FoodActivity.this, PromoActivity.class);
+                promoIntent.putExtra("currentUserId", currentUserId);
+                startActivity(promoIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
                 return true;
 
             default:

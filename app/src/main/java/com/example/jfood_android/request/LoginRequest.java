@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginRequest extends StringRequest {
-    private static final String URL = "https://jfood-hanif.herokuapp.com//customer/login";
+    private static final String URL = "https://jfood-hanif.herokuapp.com/customer/login";
     private Map<String, String> params;
 
     public LoginRequest(String email, String password, Response.Listener<String> listener){

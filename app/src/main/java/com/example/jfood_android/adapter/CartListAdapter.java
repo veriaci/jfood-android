@@ -29,13 +29,13 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.CustomViewHolder>{
 
-    Context context;
-    ArrayList<Food> foods;
-    ArrayList<Integer> foodQuantity;
+    private Context context;
+    private ArrayList<Food> foods;
+    private ArrayList<Integer> foodQuantity;
     private Integer[] totalPrice;
-    TextView tvTotalPrice;
+    private TextView tvTotalPrice;
 
-    SharedPreferences pref;
+    private SharedPreferences pref;
 
     public CartListAdapter(Context context, ArrayList<Food> foods, ArrayList<Integer> foodQuantity, Integer[] totalPrice, TextView tvTotalPrice){
         this.context = context;
@@ -56,7 +56,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Custom
     public CustomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.cart_item, parent, false);
-        return new CartListAdapter.CustomViewHolder(view);
+        return new CustomViewHolder(view);
         // return null;
     }
 
@@ -84,7 +84,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Custom
         holder.cvItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, ("food id: " + food.getId()), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, ("food id: " + food.getId()), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), FoodActivity.class);
                 intent.putExtra("currentUserId", tempUserId);
                 intent.putExtra("foodId", food.getId());
@@ -135,7 +135,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Custom
         return 0;
     }
 
-    public  void deleteItem(int foodId){
+    private void deleteItem(int foodId){
         CartDataSource dataSource = new CartDataSource(context);
         String currentUserEmail = "";
 
@@ -151,14 +151,14 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Custom
         }
     }
 
-    public void addItem(String currentUserEmail, int foodId, int foodPrice){
+    private void addItem(String currentUserEmail, int foodId, int foodPrice){
         CartDataSource cartDataSource = new CartDataSource(context);
         cartDataSource.open();
         cartDataSource.addItem(currentUserEmail,foodId,foodPrice);
         cartDataSource.close();
     }
 
-    public class CustomViewHolder extends RecyclerView.ViewHolder {
+    static class CustomViewHolder extends RecyclerView.ViewHolder {
         TextView tvFoodName;
         TextView tvFoodPrice;
         CardView cvItem;
@@ -167,7 +167,7 @@ public class CartListAdapter extends RecyclerView.Adapter<CartListAdapter.Custom
         ImageButton btnDeleteItem;
         ImageButton btnAddItem;
 
-        public CustomViewHolder(@NonNull View itemView) {
+        CustomViewHolder(@NonNull View itemView) {
             super(itemView);
             cvItem = itemView.findViewById(R.id.cv_item_cart);
             tvFoodName = itemView.findViewById(R.id.tv_food_name_cart);

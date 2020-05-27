@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".activity.PromoActivity"
     android:orientation="vertical"
     android:theme="@style/Basil"
     android:background="@color/basilBackground">
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticPromoId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Promo ID:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvPromoId"
@@ -29,23 +29,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticPromoCode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Promo Code:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvPromoCode"
@@ -54,24 +52,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticPromoDiscount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Discount:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvPromoDiscount"
@@ -80,24 +75,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticMinPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Minimum Price:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvPromoMinPrice"
@@ -106,24 +98,21 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:orientation="horizontal"
+        android:gravity="center">
         <TextView
             android:id="@+id/staticPromoActive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Active Status:"
             android:fontFamily="@font/lekton_regular"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
 
         <TextView
             android:id="@+id/tvPromoActive"
@@ -132,15 +121,28 @@
             android:text="TextView"
             android:fontFamily="@font/lekton_bold"
             android:textAlignment="viewEnd"
-            android:ems="10"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"/>
+            android:ems="10"/>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCopyPromo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30sp"
+        android:layout_marginVertical="5dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:elevation="4dp"
+        android:background="@drawable/button_accept"
+        android:foreground="?selectableItemBackgroundBorderless"
+        android:fontFamily="@font/montserrat_medium"
+        android:text="COPY PROMO CODE"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="10dp"
         android:background="@color/basilPrimary100"/>
 
 </LinearLayout>
