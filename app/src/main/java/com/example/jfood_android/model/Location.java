@@ -1,4 +1,4 @@
-package com.example.jfood_android;
+package com.example.jfood_android.model;
 
 /**
  * Class sebagai Blueprint dari objek Location (lokasi)

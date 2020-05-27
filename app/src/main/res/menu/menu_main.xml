@@ -15,4 +15,14 @@
         android:title="cart"
         app:showAsAction="always"/>
 
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_history_basil_24dp"
+        android:title="history"/>
+
+    <item
+        android:id="@+id/action_promo"
+        android:icon="@drawable/ic_attach_money_basil_24dp"
+        android:title="promo"/>
+
 </menu>

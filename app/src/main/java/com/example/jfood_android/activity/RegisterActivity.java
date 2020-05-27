@@ -58,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
             progressDialog.show();
             name = etName.getEditText().getText().toString();
-            if(checkEmail() | checkPassword()){
+            if(checkEmail() && checkPassword()){
                 email = etEmail.getEditText().getText().toString();
                 password = etPassword.getEditText().getText().toString();
             }

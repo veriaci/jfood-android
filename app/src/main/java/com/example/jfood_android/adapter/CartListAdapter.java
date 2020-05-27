@@ -18,12 +18,9 @@ import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.example.jfood_android.Food;
+import com.example.jfood_android.model.Food;
 import com.example.jfood_android.R;
 import com.example.jfood_android.activity.FoodActivity;
-import com.example.jfood_android.activity.OrderActivity;
 import com.example.jfood_android.database.CartDataSource;
 
 import java.util.ArrayList;

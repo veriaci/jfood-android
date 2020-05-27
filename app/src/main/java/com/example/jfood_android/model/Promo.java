@@ -1,4 +1,4 @@
-package HanifImam.jfood.model;
+package com.example.jfood_android.model;
 
 /**
  * Class sebagai Blueprint dari objek Promo

@@ -12,9 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.FoodActivity"
+        <activity android:name=".activity.PromoActivity"></activity>
+        <activity android:name=".activity.HistoryActivity" />
+        <activity
+            android:name=".activity.FoodActivity"
             android:label="Food"
-            android:parentActivityName=".activity.MainActivity"/>
+            android:parentActivityName=".activity.MainActivity" />
         <activity
             android:name=".activity.CartActivity"
             android:label="Food Cart"

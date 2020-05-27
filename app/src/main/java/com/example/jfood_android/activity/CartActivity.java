@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,11 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.jfood_android.Food;
+import com.example.jfood_android.model.Food;
 import com.example.jfood_android.R;
 import com.example.jfood_android.database.CartDataSource;
 import com.example.jfood_android.adapter.CartListAdapter;
-import com.example.jfood_android.request.OrderRequest;
 import com.example.jfood_android.request.FoodsFetchRequest;
 import com.google.gson.Gson;
 

@@ -24,12 +24,12 @@ import androidx.core.view.ViewCompat;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.example.jfood_android.Food;
-import com.example.jfood_android.Location;
+import com.example.jfood_android.model.Food;
+import com.example.jfood_android.model.Location;
 import com.example.jfood_android.adapter.MainListAdapter;
 import com.example.jfood_android.request.MenuRequest;
 import com.example.jfood_android.R;
-import com.example.jfood_android.Seller;
+import com.example.jfood_android.model.Seller;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
@@ -229,9 +229,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_cart:
-                Intent intent = new Intent(MainActivity.this, CartActivity.class);
-                intent.putExtra("currentUserId", currentUserId);
-                startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                Intent cartIntent = new Intent(MainActivity.this, CartActivity.class);
+                cartIntent.putExtra("currentUserId", currentUserId);
+                startActivity(cartIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                return true;
+
+            case R.id.action_history:
+                Intent historyIntent = new Intent(MainActivity.this, HistoryActivity.class);
+                historyIntent.putExtra("currentUserId", currentUserId);
+                startActivity(historyIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
+                return true;
+
+            case R.id.action_promo:
+                Intent promoIntent = new Intent(MainActivity.this, PromoActivity.class);
+                promoIntent.putExtra("currentUserId", currentUserId);
+                startActivity(promoIntent, ActivityOptionsCompat.makeSceneTransitionAnimation(this).toBundle());
                 return true;
 
             default:

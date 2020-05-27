@@ -18,18 +18,15 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.ViewCompat;
 
-import com.example.jfood_android.Food;
+import com.example.jfood_android.model.Food;
 import com.example.jfood_android.R;
-import com.example.jfood_android.Seller;
+import com.example.jfood_android.model.Seller;
 import com.example.jfood_android.activity.FoodActivity;
-import com.example.jfood_android.activity.MainActivity;
-import com.example.jfood_android.activity.OrderActivity;
 import com.example.jfood_android.database.CartDataSource;
 
 import static android.content.Context.MODE_PRIVATE;
