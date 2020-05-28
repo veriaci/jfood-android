@@ -39,10 +39,11 @@
                 <TextView
                     android:id="@+id/tv_food_name_cart"
                     android:transitionName="example_transition"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
                     android:textColor="@color/basilPrimary500"
-                    android:textSize="30dp"
+                    android:textSize="20sp"
+                    android:autoSizeTextType="uniform"
                     android:fontFamily="@font/lekton_bold"
                     android:text="Makanan"
                     />
@@ -51,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/basilPrimary800"
-                    android:textSize="18dp"
+                    android:textSize="18sp"
                     android:fontFamily="@font/lekton_regular"
                     android:text="Rp. 39999"
                     />
@@ -87,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/basilPrimary800"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:fontFamily="@font/lekton_regular"
                     android:text="Qty : "/>
                 <TextView
@@ -96,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="viewEnd"
                     android:textColor="@color/basilPrimary800"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:fontFamily="@font/lekton_regular"
                     android:text="5 pcs"/>
             </LinearLayout>

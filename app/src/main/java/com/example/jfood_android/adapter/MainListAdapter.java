@@ -2,8 +2,6 @@ package com.example.jfood_android.adapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Map;
 
 import android.app.Activity;
@@ -36,19 +34,17 @@ import static android.content.Context.MODE_PRIVATE;
 public class MainListAdapter extends BaseExpandableListAdapter implements Filterable {
 
     private Context _context;
-    private LinkedHashSet<Seller> _setDataHeader; // header titles
-    private ArrayList<Seller> _listDataHeader;
+    private ArrayList<Seller> _listDataHeader; // header titles
     // child data in format of header title, child title
     private HashMap<Seller, ArrayList<Food>> _listDataChild;
     private HashMap<Seller, ArrayList<Food>> _listDataChildFull;
 
     SharedPreferences pref;
 
-    public MainListAdapter(Context context, ArrayList<Seller> setDataHeader,
+    public MainListAdapter(Context context, ArrayList<Seller> listDataHeader,
                                  HashMap<Seller, ArrayList<Food>> listChildData) {
         this._context = context;
-        this._listDataHeader = setDataHeader;
-        //this._listDataHeader = new ArrayList<>(_setDataHeader);
+        this._listDataHeader = listDataHeader;
         this._listDataChild = listChildData;
         _listDataChildFull = new HashMap<>(listChildData);
     }
@@ -116,7 +112,6 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
                 notifyDataSetChanged();
             }
         });
-
         return convertView;
     }
 
