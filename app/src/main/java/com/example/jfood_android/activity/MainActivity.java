@@ -2,6 +2,8 @@ package com.example.jfood_android.activity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 import android.app.ProgressDialog;
@@ -30,7 +32,9 @@ import com.example.jfood_android.adapter.MainListAdapter;
 import com.example.jfood_android.request.MenuRequest;
 import com.example.jfood_android.R;
 import com.example.jfood_android.model.Seller;
+import com.example.jfood_android.request.SellerFetchRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
     HashMap<String, List<String>> listDataChild;
 
     private ArrayList<Seller> listSeller = new ArrayList<>();
+    private LinkedHashSet<Seller> setSeller = new LinkedHashSet<>();
+    private ArrayList<Integer> listIdSeller = new ArrayList<>();
     private ArrayList<Food> foodIdList = new ArrayList<>();
     private HashMap<Seller, ArrayList<Food>> childMapping = new HashMap<>();
 
@@ -115,9 +121,11 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         foodIdList.clear();
         listSeller.clear();
+        setSeller.clear();
         progressDialog.show();
         // preparing list data
         refreshList();
+        //refreshSeller();
     }
 
     @Override
@@ -160,19 +168,36 @@ public class MainActivity extends AppCompatActivity {
                         Food food1 = new Food(idFood, nameFood, seller1, price, category);
 
                         // Add to List
+                        //listIdSeller.add(idSeller);
+                        //ArrayList<Seller> tempSellers = new ArrayList<>();
+                        /*
                         if(listSeller.isEmpty()){
                             listSeller.add(seller1);
                         } else {
                             for (Seller temp : listSeller){
-                                if (temp.getName().equals(seller1.getName())){
+                                if (!temp.getName().equals(seller1.getName())){
+                                    listSeller.add(seller1);
                                     break;
                                 } else {
-                                    listSeller.add(seller1);
+                                    break;
                                 }
                             }
-                        }
-                        foodIdList.add(food1);
+                        }*/
 
+                        //listIdSeller = removeDuplicates(listIdSeller);
+                        boolean tester = true;
+                        //listSeller.clear();
+                        for (Seller tempSeller : listSeller){
+                            if (tempSeller.getId() == seller1.getId()){
+                                tester = false;
+                            }
+                        }
+                        if (tester){
+                            listSeller.add(seller1);
+                        }
+                        //listSeller.add(seller1);
+
+                        foodIdList.add(food1);
                         for (Seller sel : listSeller){
                             ArrayList<Food> temp = new ArrayList<>();
                             for (Food foo : foodIdList){
@@ -182,21 +207,46 @@ public class MainActivity extends AppCompatActivity {
                             }
                             childMapping.put(sel,temp);
                         }
+
+                        listAdapter = new MainListAdapter(MainActivity.this, listSeller, childMapping);
+                        progressDialog.dismiss();
+                        expListView.setAdapter(listAdapter);
                     }
                 }
             } catch (JSONException e){
                 Toast.makeText(MainActivity.this, "Failed to Get the Food", Toast.LENGTH_SHORT).show();
             }
-            listAdapter = new MainListAdapter(MainActivity.this, listSeller, childMapping);
-
-            progressDialog.dismiss();
-            // setting list adapter
-            expListView.setAdapter(listAdapter);
             }
         };
         MenuRequest menuRequest = new MenuRequest(responseListener);
         RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
         queue.add(menuRequest);
+    }
+
+    protected void refreshSeller(){
+        Response.Listener<String> responseListener = new Response.Listener<String>(){
+            @Override
+            public void onResponse(String response){
+                try{
+                    JSONArray jsonResponse = new JSONArray(response);
+                    if (jsonResponse != null){
+                        for (int i = 0; i < jsonResponse.length(); i++){
+                            JSONObject seller = jsonResponse.getJSONObject(i);
+
+                            Gson gson = new Gson();
+                            Seller gSeller = gson.fromJson(seller.toString(), Seller.class);
+
+                            listSeller.add(gSeller);
+                        }
+                    }
+                } catch (JSONException e){
+                    Toast.makeText(MainActivity.this, "Failed to Get the Seller", Toast.LENGTH_SHORT).show();
+                }
+            }
+        };
+        SellerFetchRequest sellerRequest = new SellerFetchRequest(responseListener);
+        RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
+        queue.add(sellerRequest);
     }
 
     @Override
@@ -249,5 +299,16 @@ public class MainActivity extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public ArrayList<Integer> removeDuplicates(ArrayList<Integer> list) {
+        ArrayList<Integer> ret = new ArrayList<>();
+
+        for (Integer item: list) {
+            if (!ret.contains(item)) {
+                ret.add(item);
+            }
+        }
+        return ret;
     }
 }

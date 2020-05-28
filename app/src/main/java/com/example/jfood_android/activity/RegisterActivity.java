@@ -70,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
                         if (jsonObject != null){
                             progressDialog.dismiss();
                             Toast.makeText(RegisterActivity.this, "Register Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                            startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(RegisterActivity.this).toBundle());
                         }
                     } catch (JSONException e){
                         progressDialog.dismiss();
