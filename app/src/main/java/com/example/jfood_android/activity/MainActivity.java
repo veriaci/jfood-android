@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Food> foodIdList = new ArrayList<>();
     private HashMap<Seller, ArrayList<Food>> childMapping = new HashMap<>();
 
+    MenuItem searchItem = null;
+    SearchView searchView = null;
+
     private String currentUserId;
     SharedPreferences pref;
     ProgressDialog progressDialog;
@@ -92,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        clearSearch();
     }
 
     protected void refreshList(){
@@ -169,8 +173,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) searchItem.getActionView();
 
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
@@ -215,6 +219,12 @@ public class MainActivity extends AppCompatActivity {
                 // Invoke the superclass to handle it.
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void clearSearch(){
+        searchView.onActionViewCollapsed();
+        searchView.setQuery("", false);
+        searchView.clearFocus();
     }
 
     public ArrayList<Integer> removeDuplicates(ArrayList<Integer> list) {

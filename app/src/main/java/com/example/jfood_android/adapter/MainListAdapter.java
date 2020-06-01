@@ -139,7 +139,7 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded,
                              View convertView, ViewGroup parent) {
-        final Seller seller = (Seller) getGroup(groupPosition);
+        Seller seller = (Seller) getGroup(groupPosition);
         String headerTitle = seller.getName();
 
         if (convertView == null) {
