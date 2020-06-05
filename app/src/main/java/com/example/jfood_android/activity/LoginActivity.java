@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences pref;
     ProgressDialog progressDialog;
 
+    // mempersiapkan activity saat pertama kali dimulai
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
             etPassword.getEditText().setText(pref.getString("password", ""));
         }
 
+        // reaksi saat tombol login ditekan
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
                 public void onClick(View view){
@@ -83,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // mengarahkan pengguna ke page register saat mereka menekan tombol register
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

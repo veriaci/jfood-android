@@ -120,7 +120,6 @@ public class CartActivity extends AppCompatActivity{
             tvKosong.setVisibility(View.VISIBLE);
             progressDialog.dismiss();
         }
-
     }
 
     @Override
@@ -128,6 +127,7 @@ public class CartActivity extends AppCompatActivity{
         super.onPause();
     }
 
+    // mengambl data item apasaja yang ada di cart dari database lokal
     public void getCartData() {
         String currentUserEmail = "";
 
@@ -143,6 +143,7 @@ public class CartActivity extends AppCompatActivity{
         dataSource.close();
     }
 
+    // mengambil informasi masing2 item di cart dari database server
     private void getItemCart() {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override

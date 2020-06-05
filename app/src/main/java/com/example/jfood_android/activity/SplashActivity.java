@@ -35,6 +35,8 @@ public class SplashActivity extends AppCompatActivity {
         SplashAsyncTask(SplashActivity activity) {
             activityWeakReference = new WeakReference<SplashActivity>(activity);
         }
+
+        // dilakukan sebelum task dimulai: memunculkan progress bar
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -44,6 +46,8 @@ public class SplashActivity extends AppCompatActivity {
             }
             activity.pbSplash.setVisibility(View.VISIBLE);
         }
+
+        // dilakukan selama task berlangsung: menghitung 1 sampai 100 selama sekitar 2 detik
         @Override
         protected String doInBackground(Integer... integers) {
             for (int i = 0; i < integers[0]; i++) {
@@ -56,6 +60,8 @@ public class SplashActivity extends AppCompatActivity {
             }
             return "Finished!";
         }
+
+        // dilakukan selama task berlangsung: memperbaharui progressbar sesuai dengan angka yg dihitung pada background
         @Override
         protected void onProgressUpdate(Integer... values) {
             super.onProgressUpdate(values);
@@ -65,6 +71,8 @@ public class SplashActivity extends AppCompatActivity {
             }
             activity.pbSplash.setProgress(values[0]);
         }
+
+        // dilakukan setelah task selesai (perhitungan mencapai 100): pindah ke LoginActivity
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);

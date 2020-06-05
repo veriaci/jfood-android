@@ -26,6 +26,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    // mempersiapkan variabel
     private TextInputLayout etName;
     private TextInputLayout etEmail;
     private TextInputLayout etPassword;
@@ -37,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     String email = "";
     String password = "";
 
+    // mempersiapkan activity saat pertama kali dimulai
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         tvLogin = findViewById(R.id.tvLogin);
 
-
+        // dilakukan saat menekan tombol REGISTER
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // pindah ke halaman login
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,6 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    // memeriksa apakah input email sesuai dengan regex email atau tidak
     private boolean checkEmail(){
         String emailInput = etEmail.getEditText().getText().toString().trim();
         Pattern p = Pattern.compile("^[\\w+&*~-]+(?:\\.[\\w+&*~-]+)*@(?!-)(?:[\\w-]+\\.)[a-zA-Z]{2,7}$");
@@ -112,6 +116,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    // memeriksa apakah input password sesuai dengan regex password atau tidak
     private boolean checkPassword() {
         String passwordInput = etPassword.getEditText().getText().toString().trim();
         Pattern p = Pattern.compile("(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}");
@@ -127,9 +132,5 @@ public class RegisterActivity extends AppCompatActivity {
             etPassword.setError(null);
             return true;
         }
-    }
-
-    public void confirmInput(View view){
-        Toast.makeText(RegisterActivity.this, "Validation success!?", Toast.LENGTH_SHORT).show();
     }
 }

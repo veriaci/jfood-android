@@ -89,6 +89,7 @@ public class FoodActivity extends AppCompatActivity {
         });
     }
 
+    // memasukkan makanan yang dipilih kedalam keranjang
     public void addItem(String currentUserEmail, int foodId, int foodPrice){
         CartDataSource cartDataSource = new CartDataSource(FoodActivity.this);
         cartDataSource.open();
@@ -96,12 +97,14 @@ public class FoodActivity extends AppCompatActivity {
         cartDataSource.close();
     }
 
+    // memperbaharui OptionsMenu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_food, menu);
         return true;
     }
 
+    // Memberikan respon saat OptionsMenu dipilih
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

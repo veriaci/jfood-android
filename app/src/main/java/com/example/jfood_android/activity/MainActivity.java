@@ -38,7 +38,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-
+    // mempersiapkan variabel
     MainListAdapter listAdapter;
     ExpandableListView expListView;
 
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     ProgressDialog progressDialog;
 
+    // mempersiapkan activity saat pertama kali dimulai
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             currentUserId = pref.getString("currentUserId", "");
         }
 
+        // mengarahkan ke laman penyelesaian pesanan
         fabSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,12 +83,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // merapihkan arraylist yang ada saat pengguna kembali ke MainActivity, untuk menghindari duplikasi data
     @Override
     protected void onResume(){
         super.onResume();
-        foodIdList.clear();
-        listSeller.clear();
-        setSeller.clear();
+        if (foodIdList != null){
+            foodIdList.clear();
+        }
+
+        if (listSeller != null){
+            listSeller.clear();
+        }
+
+        if (setSeller != null){
+            setSeller.clear();
+        }
+        clearSearch();
         progressDialog.show();
         // preparing list data
         refreshList();
@@ -95,9 +107,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        clearSearch();
     }
 
+    // memperbaharui list penjual dan makanan yang dijual
     protected void refreshList(){
         Response.Listener<String> responseListener = new Response.Listener<String>(){
             @Override
@@ -169,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         queue.add(menuRequest);
     }
 
+    // mengubah OptionsMenu default dan mengisi tombol serta fitur tambahan
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -193,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    // memberikan reaksi saat tombol di OptionsMenu ditekan
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -221,20 +235,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // mengosongkan kembali searchbar
     public void clearSearch(){
         searchView.onActionViewCollapsed();
         searchView.setQuery("", false);
         searchView.clearFocus();
-    }
-
-    public ArrayList<Integer> removeDuplicates(ArrayList<Integer> list) {
-        ArrayList<Integer> ret = new ArrayList<>();
-
-        for (Integer item: list) {
-            if (!ret.contains(item)) {
-                ret.add(item);
-            }
-        }
-        return ret;
     }
 }

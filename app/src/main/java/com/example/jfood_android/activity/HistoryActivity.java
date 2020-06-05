@@ -76,6 +76,7 @@ public class HistoryActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    // mengambil list seluruh invoice yang dimiliki Customer
     private void getHistoryList() {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override

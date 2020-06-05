@@ -75,6 +75,7 @@ public class PromoActivity extends AppCompatActivity {
         super.onPause();
     }
 
+    // mengambil promo yang ada dari server
     private void getPromoList() {
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override

@@ -32,7 +32,6 @@ import com.example.jfood_android.database.CartDataSource;
 import static android.content.Context.MODE_PRIVATE;
 
 public class MainListAdapter extends BaseExpandableListAdapter implements Filterable {
-
     private Context _context;
     private ArrayList<Seller> _listDataHeader; // header titles
     // child data in format of header title, child title
@@ -89,6 +88,7 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
         txtListChild.setText(childText);
         txtListPrice.setText("Rp. " + childPrice);
 
+        // mengarahkan ke laman makanan yang dipilih
         txtListChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +105,7 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
             }
         });
 
+        // respon tombol untuk menambahkan makanan yang terpilih ke keranjang makanan
         btnAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,6 +167,7 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
         return true;
     }
 
+    // menambahkan makanan yang terpilih ke keranjang makanan
     private void addItem(String currentUserEmail, int foodId, int foodPrice){
         CartDataSource cartDataSource = new CartDataSource(_context);
         cartDataSource.open();
@@ -173,16 +175,20 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
         cartDataSource.close();
     }
 
+    // mengembalikan filter
     @Override
     public Filter getFilter(){
         return mainFilter;
     }
 
+    // memfilter makanan yang ada berdasarkan nama yang tertulis di searchView
     private Filter mainFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
             HashMap<Seller, ArrayList<Food>> filteredList = new HashMap<>();
             ArrayList<Food> filteredFood = new ArrayList<>();
+            ArrayList<Food> filteredEmpty = new ArrayList<>();
+            boolean tester = false;
 
             if (constraint == null || constraint.length() == 0){
                 filteredList.putAll(_listDataChildFull);
@@ -190,13 +196,21 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
                 for (Map.Entry<Seller, ArrayList<Food>> entry : _listDataChildFull.entrySet()){
+                    tester = false;
                     //System.out.println(entry.getKey() + " = " + entry.getValue());
                     for(Food food : entry.getValue()){
                         if (food.getName().toLowerCase().contains(filterPattern)){
                             filteredFood.add(food);
+                            if (_listDataChild.get(entry.getKey()).contains(food)){
+                                tester = true;
+                            }
                         }
                     }
-                    filteredList.put(entry.getKey(),filteredFood);
+                    if(tester){
+                        filteredList.put(entry.getKey(),filteredFood);
+                    } else {
+                        filteredList.put(entry.getKey(),filteredEmpty);
+                    }
                 }
             }
             FilterResults results = new FilterResults();
@@ -205,6 +219,7 @@ public class MainListAdapter extends BaseExpandableListAdapter implements Filter
             return results;
         }
 
+        // memperbaharui arraylist yang menampilkan penjual dan makanan berdasarkan filter
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             _listDataChild.clear();
